@@ -48,6 +48,8 @@
               pkgs.nil
               pkgs.nixpkgs-fmt
             ];
+            environment.systemPath = [ "/opt/homebrew/bin" ];
+            environment.pathsToLink = [ "/Applications" ];
             system.keyboard.enableKeyMapping = true;
             system.keyboard.remapCapsLockToEscape = true;
             fonts.fontDir.enable = true;
@@ -61,6 +63,15 @@
             system.defaults.NSGlobalDomain.KeyRepeat = 1;
             # For backwards compatibility, don't change
             system.stateVersion = 4;
+            homebrew = {
+              enable = true;
+              caskArgs.no_quarantine = true;
+              global.brewfile = true;
+              masApps = {};
+              casks = [ "amethyst" "raycast" ];
+              taps = [ "fujiapple852/trippy" ];
+              brews = [ "trippy" ];
+            };
           })
 
           inputs.home-manager.darwinModules.home-manager
@@ -94,6 +105,16 @@
                   programs.zsh.shellAliases = { ls = "ls --color=auto -F"; };
                   programs.starship.enable = true;
                   programs.starship.enableZshIntegration = true;
+                  home.file.".inputrc".text = ''
+                    set show-all-if-ambiguous on
+                    set completion-ignore-case on
+                    set mark-directories on
+                    set mark-symlinked-directories on
+                    set match-hidden-files off
+                    set visible-stats on
+                    set keymap vi
+                    set editing-mode vi-insert
+                  '';
                 })
               ];
             };
