@@ -29,7 +29,12 @@
           nix.extraOptions = ''
             experimental-features = nix-command flakes
           '';
-          environment.systemPackages = [ pkgs.coreutils ];
+          environment.systemPackages = [ 
+            pkgs.coreutils 
+            pkgs.iterm2
+            pkgs.helix
+            pkgs.rnix-lsp  
+          ];
           system.keyboard.enableKeyMapping=true;
           system.keyboard.remapCapsLockToEscape = true;
           fonts.fontDir.enable = true;
