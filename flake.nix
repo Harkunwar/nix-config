@@ -14,6 +14,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: {
+    # .mac at the end is my computer name
     darwinConfigurations.mac = 
       inputs.darwin.lib.darwinSystem {
         system = "x86_64-darwin";
