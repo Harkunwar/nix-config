@@ -31,8 +31,18 @@
             '';
             environment.systemPackages = [
               pkgs.coreutils
+
+              # Node JS setup
+              pkgs.nodejs
+              pkgs.yarn
+              pkgs.nodePackages.pnpm
+
+              # Tools
               pkgs.iterm2
               pkgs.helix
+
+              # LSPs
+              pkgs.nodePackages.typescript-language-server
               pkgs.nil
               pkgs.nixpkgs-fmt
             ];
