@@ -43,6 +43,8 @@
 
               # LSPs
               pkgs.nodePackages.typescript-language-server
+              pkgs.nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
+              pkgs.nodePackages.bash-language-server
               pkgs.nil
               pkgs.nixpkgs-fmt
             ];
@@ -90,11 +92,6 @@
                   programs.zsh.shellAliases = { ls = "ls --color=auto -F"; };
                   programs.starship.enable = true;
                   programs.starship.enableZshIntegration = true;
-                  programs.alacritty = {
-                    enable = true;
-                    settings.font.normal.family = "MesloLGS Nerd Font Mono";
-                    settings.font.size = 16;
-                  };
                 })
               ];
             };
