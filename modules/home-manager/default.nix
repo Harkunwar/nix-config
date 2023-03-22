@@ -20,7 +20,13 @@
   programs.zsh.enableCompletion = true;
   programs.zsh.enableAutosuggestions = true;
   programs.zsh.enableSyntaxHighlighting = true;
-  programs.zsh.shellAliases = { ls = "ls --color=auto -F"; };
+  programs.zsh.shellAliases = { 
+    ls = "ls --color=auto -F";
+
+
+    nixswitch = "darwin-rebuild switch --flake ~/src/system-config/.#";
+    nixup = "pushd ~/src/system-config; nix flake update; nixswitch; popd;";  
+  };
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
   home.file.".inputrc".source = ./dotfiles/inputrc;
