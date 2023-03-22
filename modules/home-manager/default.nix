@@ -2,7 +2,7 @@
   # Specify my home-manager configs
   # Guide: https://nix-community.github.io/home-manager/options.html
   home.stateVersion = "22.11"; # Don't change this, leave it alone
-  home.packages = [ pkgs.ripgrep pkgs.fd pkgs.curl pkgs.less ];
+  home.packages = with pkgs; [ ripgrep fd curl less ];
   home.sessionVariables = {
     PAGER = "less";
     CLICOLOR = 1;
