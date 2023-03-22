@@ -17,8 +17,9 @@
     enable = true;
     userName = "Harkunwar Kochar";
     userEmail = "10580591+Harkunwar@users.noreply.github.com";
-    delta = {
-      enable = true;
+    delta.enable = true;
+    aliases = {
+      ph = "push origin \"$(git_current_branch)\"";
     };
   };
   programs.zsh.enable = true;
