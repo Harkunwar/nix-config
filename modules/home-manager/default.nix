@@ -16,13 +16,15 @@
   programs.git.enable = true;
   programs.git.userName = "Harkunwar Kochar";
   programs.git.userEmail = "10580591+Harkunwar@users.noreply.github.com";
+  programs.git.diff-so-fancy.enable = true;
+  programs.git.difftastic.enable = true;
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
   programs.zsh.enableAutosuggestions = true;
   programs.zsh.enableSyntaxHighlighting = true;
+  programs.zsh.prezto.tmux.itermIntegration = true;
   programs.zsh.shellAliases = { 
     ls = "ls --color=auto -F";
-
 
     nixswitch = "darwin-rebuild switch --flake ~/src/system-config/.#";
     nixup = "pushd ~/src/system-config; nix flake update; nixswitch; popd;";  
