@@ -13,11 +13,14 @@
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
   programs.exa.enable = true;
-  programs.git.enable = true;
-  programs.git.userName = "Harkunwar Kochar";
-  programs.git.userEmail = "10580591+Harkunwar@users.noreply.github.com";
-  programs.git.diff-so-fancy.enable = true;
-  programs.git.difftastic.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Harkunwar Kochar";
+    userEmail = "10580591+Harkunwar@users.noreply.github.com";
+    delta = {
+      enable = true;
+    };
+  };
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
   programs.zsh.enableAutosuggestions = true;
