@@ -19,7 +19,9 @@
     userEmail = "10580591+Harkunwar@users.noreply.github.com";
     delta.enable = true;
     aliases = {
-      ph = "push origin \"$(git_current_branch)\"";
+      ph = "push origin head";
+      au = "add -u";
+      cm = "commit -m";
     };
   };
   programs.zsh.enable = true;
