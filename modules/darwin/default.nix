@@ -23,6 +23,7 @@
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
     pkgs.nodePackages.bash-language-server
+    pkgs.marksman # Markdown
     pkgs.nil
     pkgs.nixpkgs-fmt
   ];
