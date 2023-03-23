@@ -38,4 +38,5 @@
   programs.starship.enable = true;
   programs.starship.enableZshIntegration = true;
   home.file.".inputrc".source = ./dotfiles/inputrc;
+  home.file.".config/helix/config.toml".source = ./dotfiles/config/helix/config.toml;
 })
