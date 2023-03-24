@@ -24,6 +24,9 @@
       enableZshIntegration = true;
     };
     exa.enable = true;
+    htop = {
+      enable = true;
+    };
     git = {
       enable = true;
       userName = "Harkunwar Kochar";
