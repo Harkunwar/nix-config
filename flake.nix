@@ -13,15 +13,15 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs: {
+  outputs = inputs@{nixpkgs, home-manager, darwin, self, ...}: {
     # .mac at the end is my computer name
     darwinConfigurations.mac =
-      inputs.darwin.lib.darwinSystem {
+      darwin.lib.darwinSystem {
         system = "x86_64-darwin";
-        pkgs = import inputs.nixpkgs { system = "x86_64-darwin"; };
+        pkgs = import nixpkgs { system = "x86_64-darwin"; };
         modules = [
           ./modules/darwin
-          inputs.home-manager.darwinModules.home-manager
+          home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;

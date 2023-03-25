@@ -44,6 +44,13 @@
       enableAutosuggestions = true;
       enableSyntaxHighlighting = true;
       prezto.tmux.itermIntegration = true;
+      initExtra = ''
+        # Mac OS Upgrades break Nix, this will prevent that.
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; 
+        then
+          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        fi
+      '';
       shellAliases = { 
         ls = "ls --color=auto -F";
 
@@ -51,7 +58,8 @@
 
         nixswitch = "pushd ~/src/system-config; ./switch.sh; popd;";
         nixbuild = "pushd ~/src/system-config; ./build.sh; ./switch.sh; popd;";
-        nixupdate = "pushd ~/src/system-config; ./update.sh; ./switch.sh; popd;";  
+        nixupdate = "pushd ~/src/system-config; ./update.sh; ./switch.sh; popd;";
+        nixgarbage = "pushd ~/src/system-config; ./garbage.sh; popd;";
       };
     };
     starship = { 
