@@ -49,8 +49,9 @@
 
         cat = "bat";
 
-        nixswitch = "darwin-rebuild switch --flake ~/src/system-config/.#";
-        nixup = "pushd ~/src/system-config; nix flake update; nixswitch; popd;";  
+        nixswitch = "pushd ~/src/system-config; ./switch.sh; popd;";
+        nixbuild = "pushd ~/src/system-config; ./build.sh; ./switch.sh; popd;";
+        nixupdate = "pushd ~/src/system-config; ./update.sh; ./switch.sh; popd;";  
       };
     };
     starship = { 

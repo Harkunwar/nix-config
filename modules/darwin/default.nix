@@ -1,7 +1,7 @@
 ({ pkgs, ... }: {
   # Here goes the darwin preferences and configurations
   # Guide: https://daiderd.com/nix-darwin/manual/index.html
-  programs.zsh.enable = true;
+  programs.zsh.enable = true; # Don't remove this otherwise it will break things
   environment.shells = [ pkgs.bash pkgs.zsh ];
   environment.loginShell = pkgs.zsh;
   nix.extraOptions = ''
