@@ -7,25 +7,26 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  environment.systemPackages = [
-    pkgs.coreutils
+  environment.systemPackages = with pkgs; [
+    coreutils
 
     # Node JS setup
-    pkgs.nodejs
-    pkgs.yarn
-    pkgs.nodePackages.pnpm
+    nodejs
+    yarn
+    nodePackages.pnpm
 
     # Tools
-    pkgs.iterm2
-    pkgs.helix
+    iterm2
+    helix
 
     # LSPs
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
-    pkgs.nodePackages.bash-language-server
-    pkgs.marksman # Markdown
-    pkgs.nil
-    pkgs.nixpkgs-fmt
+    marksman # Markdown
+    nil
+    nixpkgs-fmt
+    nodePackages.bash-language-server
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
+    taplo # TOML
   ];
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];
