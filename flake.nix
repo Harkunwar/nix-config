@@ -13,7 +13,7 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs@{nixpkgs, home-manager, darwin, self, ...}: {
+  outputs = inputs@{ nixpkgs, home-manager, darwin, self, ... }: {
     # .mac at the end is my computer name
     darwinConfigurations.mac =
       darwin.lib.darwinSystem {

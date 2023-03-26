@@ -11,7 +11,10 @@
     };
     file = {
       ".inputrc".source = ./dotfiles/inputrc;
+
+      # Helix Config
       ".config/helix/config.toml".source = ./dotfiles/config/helix/config.toml;
+      ".config/helix/languages.toml".source = ./dotfiles/config/helix/languages.toml;
     };
   };
   programs = {

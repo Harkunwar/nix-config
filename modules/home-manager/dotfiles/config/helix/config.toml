@@ -1,6 +1,7 @@
 theme = "dracula_at_night"
 
 [editor]
+auto-format = true
 mouse = false
 
 [editor.cursor-shape]
