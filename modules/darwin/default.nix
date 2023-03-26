@@ -8,7 +8,10 @@
     experimental-features = nix-command flakes
   '';
   environment.systemPackages = with pkgs; [
+    # Dev Tools
     coreutils
+    direnv
+    nix-direnv
 
     # Node JS setup
     nodejs
