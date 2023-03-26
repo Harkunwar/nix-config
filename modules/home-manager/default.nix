@@ -22,7 +22,7 @@
       enable = true;
       config.theme = "TwoDark";
     };
-    fzf = { 
+    fzf = {
       enable = true;
       enableZshIntegration = true;
     };
@@ -41,6 +41,9 @@
         cm = "commit -m";
       };
     };
+    zellij = {
+      enable = true;
+    };
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -54,7 +57,7 @@
           . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
         fi
       '';
-      shellAliases = { 
+      shellAliases = {
         ls = "ls --color=auto -F";
 
         cat = "bat";
@@ -65,7 +68,7 @@
         nixgarbage = "pushd ~/src/system-config; ./garbage.sh; popd;";
       };
     };
-    starship = { 
+    starship = {
       enable = true;
       enableZshIntegration = true;
     };

@@ -33,7 +33,7 @@
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
   fonts.fontDir.enable = true;
-  fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" "FiraCode" ]; }) ];
+  fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" "Meslo" "DroidSansMono" ]; }) ];
   services.nix-daemon.enable = true;
   system.defaults.finder.AppleShowAllExtensions = true;
   system.defaults.finder._FXShowPosixPathInTitle = true;
