@@ -10,8 +10,6 @@
   environment.systemPackages = with pkgs; [
     # Dev Tools
     coreutils
-    direnv
-    nix-direnv
 
     # Node JS setup
     nodejs
@@ -21,6 +19,7 @@
     # Tools
     iterm2
     helix
+    vscodium
 
     # LSPs
     marksman # Markdown
