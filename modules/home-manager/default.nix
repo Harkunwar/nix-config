@@ -8,6 +8,7 @@
       PAGER = "less";
       CLICOLOR = 1;
       EDITOR = "hx";
+      DIRENV_LOG_FORMAT = "";
     };
     file = {
       ".inputrc".source = ./dotfiles/inputrc;
@@ -21,6 +22,11 @@
     bat = {
       enable = true;
       config.theme = "TwoDark";
+    };
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
     };
     fzf = {
       enable = true;
