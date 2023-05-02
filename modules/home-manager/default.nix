@@ -55,6 +55,9 @@
       enableExtensionUpdateCheck = true;
       enableUpdateCheck = true;
       mutableExtensionsDir = true;
+      userSettings = {
+        "terminal.integrated.fontFamily" = "FiraCode Nerd Font Mono";
+      };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix                              # Nix
         esbenp.prettier-vscode                    # Prettier
