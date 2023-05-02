@@ -58,6 +58,7 @@
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix                              # Nix
         esbenp.prettier-vscode                    # Prettier
+        vscode-icons-team.vscode-icons            # VSCode Icons
       ];
     };
     zellij = {
