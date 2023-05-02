@@ -5,6 +5,7 @@
     # called derivations that saw how to build software
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-22-11
 
+
     # Manages configs and links them to your home directory
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +19,7 @@
     darwinConfigurations.mac =
       darwin.lib.darwinSystem {
         system = "x86_64-darwin";
-        pkgs = import nixpkgs { system = "x86_64-darwin"; };
+        pkgs = import nixpkgs { system = "x86_64-darwin"; config.allowUnfree = true; };
         modules = [
           ./modules/darwin
           home-manager.darwinModules.home-manager
