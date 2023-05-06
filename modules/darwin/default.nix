@@ -19,7 +19,6 @@
     # Tools
     iterm2
     helix
-    vscodium
 
     # LSPs
     marksman # Markdown
