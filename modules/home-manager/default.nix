@@ -46,9 +46,16 @@
         au = "add -u";
         cm = "commit -m";
       };
+      signing = {
+        key = null;
+        signByDefault = true;
+      };
     };
     gh = {
       enable = true;
+    };
+    gpg = {
+      enable = false;
     };
     vscode = {
       enable = true;
@@ -57,11 +64,15 @@
       mutableExtensionsDir = true;
       userSettings = {
         "terminal.integrated.fontFamily" = "FiraCode Nerd Font Mono";
+        "workbench.colorTheme" = "Default Dark+ Experimental";
+        "workbench.iconTheme" = "vscode-icons"; 
       };
       extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix                              # Nix
-        esbenp.prettier-vscode                    # Prettier
-        vscode-icons-team.vscode-icons            # VSCode Icons
+        bbenoist.nix # Nix
+        silvenon.mdx # MDX
+        esbenp.prettier-vscode # Prettier
+        dbaeumer.vscode-eslint # ESLint
+        vscode-icons-team.vscode-icons # VSCode Icons
       ];
     };
     zellij = {
