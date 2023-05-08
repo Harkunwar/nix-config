@@ -16,6 +16,9 @@
       # Helix Config
       ".config/helix/config.toml".source = ./dotfiles/config/helix/config.toml;
       ".config/helix/languages.toml".source = ./dotfiles/config/helix/languages.toml;
+
+      # ASCII Hello Art
+      ".config/zsh/hello_ascii.txt".source = ./dotfiles/config/zsh/hello_ascii.txt;
     };
   };
   programs = {
@@ -65,7 +68,7 @@
       userSettings = {
         "terminal.integrated.fontFamily" = "FiraCode Nerd Font Mono";
         "workbench.colorTheme" = "Default Dark+ Experimental";
-        "workbench.iconTheme" = "vscode-icons"; 
+        "workbench.iconTheme" = "vscode-icons";
       };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix # Nix
@@ -90,6 +93,8 @@
         then
           . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
         fi
+
+        echo "$(cat $HOME/.config/zsh/hello_ascii.txt)"
       '';
       shellAliases = {
         ls = "ls --color=auto -F";
