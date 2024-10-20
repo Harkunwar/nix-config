@@ -15,8 +15,8 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, self, ... }: {
-    # .mac at the end is my computer name
-    darwinConfigurations.mac =
+    # MacBookPro at the end is my computer name
+    darwinConfigurations.MacBookPro =
       darwin.lib.darwinSystem {
         system = "x86_64-darwin";
         pkgs = import nixpkgs { system = "x86_64-darwin"; config.allowUnfree = true; };
@@ -24,6 +24,7 @@
           ./modules/darwin
           home-manager.darwinModules.home-manager
           {
+            users.users.harkunwar.home = "/Users/harkunwar";
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;

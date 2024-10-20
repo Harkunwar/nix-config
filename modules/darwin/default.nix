@@ -20,6 +20,9 @@
     iterm2
     helix
 
+    # Browser
+    arc-browser
+
     # LSPs
     marksman # Markdown
     nil
@@ -33,8 +36,7 @@
   environment.pathsToLink = [ "/Applications" ];
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
-  fonts.fontDir.enable = true;
-  fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Meslo" "DroidSansMono" ]; }) ];
+  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Meslo" "DroidSansMono" ]; }) ];
   services.nix-daemon.enable = true;
   system.defaults.finder.AppleShowAllExtensions = true;
   system.defaults.finder._FXShowPosixPathInTitle = true;
@@ -42,6 +44,8 @@
   system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 14;
   system.defaults.NSGlobalDomain.KeyRepeat = 1;
+
+  security.pam.enableSudoTouchIdAuth = true;
   # For backwards compatibility, don't change
   system.stateVersion = 4;
   homebrew = {

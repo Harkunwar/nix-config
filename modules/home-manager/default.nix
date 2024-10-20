@@ -2,8 +2,8 @@
   # Specify my home-manager configs
   # Guide: https://nix-community.github.io/home-manager/options.html
   home = {
-    stateVersion = "22.11"; # Don't change this, leave it alone
-    packages = with pkgs; [ ripgrep fd curl less ];
+    stateVersion = "24.05";
+    packages = with pkgs; [ ripgrep fd curl less gnupg pinentry_mac ];
     sessionVariables = {
       PAGER = "less";
       CLICOLOR = 1;
@@ -35,7 +35,7 @@
       enable = true;
       enableZshIntegration = true;
     };
-    exa.enable = true;
+    eza.enable = true;
     htop = {
       enable = true;
     };
@@ -72,7 +72,7 @@
       };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix # Nix
-        silvenon.mdx # MDX
+        unifiedjs.vscode-mdx # MDX
         esbenp.prettier-vscode # Prettier
         dbaeumer.vscode-eslint # ESLint
         vscode-icons-team.vscode-icons # VSCode Icons
@@ -84,8 +84,8 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
       prezto.tmux.itermIntegration = true;
       initExtra = ''
         # Mac OS Upgrades break Nix, this will prevent that.
