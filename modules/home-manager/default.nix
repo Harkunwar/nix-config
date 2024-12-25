@@ -87,6 +87,18 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       prezto.tmux.itermIntegration = true;
+      plugins = [
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.8.0";
+            sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+          };
+        }
+      ];
       initExtra = ''
         # Mac OS Upgrades break Nix, this will prevent that.
         if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; 
