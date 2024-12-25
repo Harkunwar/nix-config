@@ -13,8 +13,8 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, self, ... }: {
-    # mac at the end is my computer name
-    darwinConfigurations.mac =
+    # MacBookPro15 at the end is my computer name
+    darwinConfigurations.MacBookPro15 =
       darwin.lib.darwinSystem {
         system = "x86_64-darwin";
         pkgs = import nixpkgs { system = "x86_64-darwin"; config.allowUnfree = true; };

@@ -12,7 +12,7 @@
 
     # JS tools
     bun
-    nodejs
+    nodejs_22
     yarn
     nodePackages.pnpm
 

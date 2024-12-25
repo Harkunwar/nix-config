@@ -49,10 +49,10 @@
         au = "add -u";
         cm = "commit -m";
       };
-      signing = {
-        key = null;
-        signByDefault = true;
-      };
+      # signing = {
+      #   key = null;
+      #   signByDefault = true;
+      # };
     };
     gh = {
       enable = true;

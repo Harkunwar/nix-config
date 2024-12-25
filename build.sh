@@ -1,1 +1,1 @@
-nix build .#darwinConfigurations.mac.system --extra-experimental-features flakes --extra-experimental-features nix-command
+nix build .#darwinConfigurations.MacBookPro15.system --extra-experimental-features flakes --extra-experimental-features nix-command
