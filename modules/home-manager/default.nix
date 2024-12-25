@@ -2,7 +2,7 @@
   # Specify my home-manager configs
   # Guide: https://nix-community.github.io/home-manager/options.html
   home = {
-    stateVersion = "24.05";
+    stateVersion = "24.11";
     packages = with pkgs; [ ripgrep fd curl less gnupg pinentry_mac ];
     sessionVariables = {
       PAGER = "less";
