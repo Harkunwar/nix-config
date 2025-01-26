@@ -1,1 +1,2 @@
-nix build .#darwinConfigurations.MacBookPro15.system --extra-experimental-features flakes --extra-experimental-features nix-command
+export HOSTNAME=$(hostname -s)
+nix build .#darwinConfigurations.${HOSTNAME}.system --extra-experimental-features flakes --extra-experimental-features nix-command
