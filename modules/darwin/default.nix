@@ -12,16 +12,16 @@
 
     # JS tools
     bun
-    nodejs_22
-    yarn
-    nodePackages.pnpm
+    # nodejs_22
+    # yarn
+    # nodePackages.pnpm
 
     # Tools
     iterm2
     helix
 
     # Browser
-    arc-browser
+    # arc-browser
 
     # LSPs
     marksman # Markdown

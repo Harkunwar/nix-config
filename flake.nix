@@ -9,12 +9,12 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Controls system level software and settings including fonts
-    darwin.url = "github:lnl7/nix-darwin";
+    darwin.url = "github:lnl7/nix-darwin/nix-darwin-24.11";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, self, ... }: {
     # MacBookPro15 at the end is my computer name
-    darwinConfigurations.MacBookPro14 =
+    darwinConfigurations.MacbookPro14 =
       darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         pkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
