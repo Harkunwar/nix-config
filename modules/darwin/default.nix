@@ -12,9 +12,9 @@
 
     # JS tools
     bun
-    # nodejs_22
-    # yarn
-    # nodePackages.pnpm
+    nodejs_23
+    yarn
+    nodePackages.pnpm
 
     # Tools
     iterm2

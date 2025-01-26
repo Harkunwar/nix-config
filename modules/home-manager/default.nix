@@ -3,7 +3,14 @@
   # Guide: https://nix-community.github.io/home-manager/options.html
   home = {
     stateVersion = "24.11";
-    packages = with pkgs; [ ripgrep fd curl less gnupg pinentry_mac ];
+    packages = with pkgs; [ 
+      ripgrep
+      fd
+      curl
+      less
+      gnupg
+      pinentry_mac
+    ];
     sessionVariables = {
       PAGER = "less";
       CLICOLOR = 1;
