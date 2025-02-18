@@ -17,11 +17,7 @@
     nodePackages.pnpm
 
     # Tools
-    iterm2
     helix
-
-    # Browser
-    # arc-browser
 
     # LSPs
     marksman # Markdown
@@ -34,26 +30,57 @@
   ];
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
   fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Meslo" "DroidSansMono" ]; }) ];
   services.nix-daemon.enable = true;
-  system.defaults.finder.AppleShowAllExtensions = true;
-  system.defaults.finder._FXShowPosixPathInTitle = true;
-  system.defaults.dock.autohide = true;
-  system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
-  system.defaults.NSGlobalDomain.InitialKeyRepeat = 14;
-  system.defaults.NSGlobalDomain.KeyRepeat = 1;
+  system = {
+    # For backwards compatibility, don't change
+    stateVersion = 4;
+    defaults = {
+      controlcenter.Bluetooth = true;
+      dock.autohide = true;
+      finder = {
+        AppleShowAllExtensions = true;
+        _FXShowPosixPathInTitle = true;
+      };
+      NSGlobalDomain = {
+        AppleShowAllExtensions = true;
+        InitialKeyRepeat = 14;
+        KeyRepeat = 1;
+      };
+    };
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToEscape = true;
+    };
+  };
 
   security.pam.enableSudoTouchIdAuth = true;
-  # For backwards compatibility, don't change
-  system.stateVersion = 4;
   homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = { };
-    casks = [ "amethyst" "raycast" ];
+    casks = [ 
+      # AI
+      "chatbox"
+      "ollama"
+
+      # Tools
+      "amethyst"
+      "iterm2"
+      "raycast"
+      "vmware-fusion"
+
+      # Proton Apps
+      "proton-drive"
+      "proton-mail"
+
+      # Entertainment
+      "stremio"
+
+      # Browser
+      "zen-browser"
+    ];
     taps = [ "fujiapple852/trippy" ];
     brews = [ "trippy" ];
   };
