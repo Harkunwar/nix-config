@@ -2,6 +2,10 @@
   # Here goes the darwin preferences and configurations
   # Guide: https://daiderd.com/nix-darwin/manual/index.html
   programs.zsh.enable = true; # Don't remove this otherwise it will break things
+  programs.zsh.shellInit = ''
+    NIX_PNPM_PATH="$(which pnpm)"
+    alias pnpm="node $NIX_PNPM_PATH"
+  '';
   environment.shells = [ pkgs.bash pkgs.zsh ];
   nix.extraOptions = ''
     experimental-features = nix-command flakes
