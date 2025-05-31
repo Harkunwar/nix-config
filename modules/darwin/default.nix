@@ -16,20 +16,24 @@
 
     # JS tools
     bun
-    nodejs_23
-    yarn
-    nodePackages.pnpm
+    (yarn.override { nodejs = null; })
+    nodejs_22
+    (pnpm_10.override { nodejs = nodejs_22; })
+    # nodePackages.pnpm
 
     # Tools
     helix
+    p7zip
+    p7zip-rar
+    rclone
 
     # LSPs
     marksman # Markdown
     nil
     nixpkgs-fmt
-    nodePackages.bash-language-server
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
+    # nodePackages.bash-language-server
+    # nodePackages.typescript-language-server
+    # nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
     taplo # TOML
   ];
   environment.systemPath = [ "/opt/homebrew/bin" ];
@@ -64,7 +68,7 @@
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = { };
-    casks = [ 
+    casks = [
       # AI
       "chatbox"
       "ollama"
@@ -74,6 +78,8 @@
       "iterm2"
       "raycast"
       "vmware-fusion"
+      "bambu-studio"
+      "keka"
 
       # Proton Apps
       "proton-drive"
@@ -83,9 +89,10 @@
       "stremio"
 
       # Browser
-      "zen-browser"
+      "zen"
+      "chromium"
     ];
     taps = [ "fujiapple852/trippy" ];
-    brews = [ "trippy" ];
+    brews = [ "trippy" "nvm" ];
   };
 })

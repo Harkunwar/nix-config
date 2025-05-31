@@ -1,1 +1,1 @@
-nix flake update --extra-experimental-features nix-command --extra-experimental-features flakes
+sudo -H nix flake update --extra-experimental-features nix-command --extra-experimental-features flakes
