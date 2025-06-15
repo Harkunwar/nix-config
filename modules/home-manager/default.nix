@@ -56,10 +56,11 @@
         au = "add -u";
         cm = "commit -m";
       };
-      # signing = {
-      #   key = null;
-      #   signByDefault = true;
-      # };
+      extraConfig = {
+        commit.gpgsign = true;
+        gpg.format = "ssh";
+        user.signingkey = "~/.ssh/id_ed25519.pub";
+      };
     };
     gh = {
       enable = true;
