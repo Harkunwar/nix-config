@@ -67,7 +67,10 @@
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
-    masApps = { };
+    masApps = { 
+      "WireGuard" = 1451685025;
+      "Bitwarden" = 1137397744;
+    };
     casks = [
       # AI
       "chatbox"
@@ -80,6 +83,7 @@
       "vmware-fusion"
       "bambu-studio"
       "keka"
+      "obsidian"
 
       # Proton Apps
       "proton-drive"

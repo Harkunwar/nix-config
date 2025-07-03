@@ -29,9 +29,11 @@
     };
   };
   programs = {
-    bat = {
+    zoxide = {
       enable = true;
-      config.theme = "TwoDark";
+      options = [
+        "--cmd cd"
+      ];
     };
     direnv = {
       enable = true;
@@ -118,8 +120,6 @@
       '';
       shellAliases = {
         ls = "ls --color=auto -F";
-
-        cat = "bat";
 
         nixswitch = "pushd ~/src/system-config; ./switch.sh; popd;";
         nixbuild = "pushd ~/src/system-config; ./build.sh; ./switch.sh; popd;";
