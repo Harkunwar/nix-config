@@ -29,9 +29,11 @@
     };
   };
   programs = {
-    bat = {
+    zoxide = {
       enable = true;
-      config.theme = "TwoDark";
+      options = [
+        "--cmd cd"
+      ];
     };
     direnv = {
       enable = true;
@@ -70,15 +72,15 @@
     };
     vscode = {
       enable = true;
-      enableExtensionUpdateCheck = true;
-      enableUpdateCheck = true;
+      profiles.default.enableExtensionUpdateCheck = true;
+      profiles.default.enableUpdateCheck = true;
       mutableExtensionsDir = true;
-      userSettings = {
+      profiles.default.userSettings = {
         "terminal.integrated.fontFamily" = "FiraCode Nerd Font Mono";
         "workbench.colorTheme" = "Default Dark+ Experimental";
         "workbench.iconTheme" = "vscode-icons";
       };
-      extensions = with pkgs.vscode-extensions; [
+      profiles.default.extensions = with pkgs.vscode-extensions; [
         bbenoist.nix # Nix
         unifiedjs.vscode-mdx # MDX
         esbenp.prettier-vscode # Prettier
@@ -107,7 +109,7 @@
           };
         }
       ];
-      initExtra = ''
+      initContent = ''
         # Mac OS Upgrades break Nix, this will prevent that.
         if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; 
         then
@@ -118,8 +120,6 @@
       '';
       shellAliases = {
         ls = "ls --color=auto -F";
-
-        cat = "bat";
 
         nixswitch = "pushd ~/src/system-config; ./switch.sh; popd;";
         nixbuild = "pushd ~/src/system-config; ./build.sh; ./switch.sh; popd;";

@@ -38,11 +38,11 @@
   ];
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];
-  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Meslo" "DroidSansMono" ]; }) ];
-  services.nix-daemon.enable = true;
+  fonts.packages = with pkgs.nerd-fonts; [ fira-code fira-mono meslo-lg droid-sans-mono ];
   system = {
     # For backwards compatibility, don't change
-    stateVersion = 4;
+    stateVersion = 5;
+    primaryUser = "harkunwar";
     defaults = {
       controlcenter.Bluetooth = true;
       dock.autohide = true;
@@ -62,12 +62,15 @@
     };
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
-    masApps = { };
+    masApps = { 
+      "WireGuard" = 1451685025;
+      "Bitwarden" = 1137397744;
+    };
     casks = [
       # AI
       "chatbox"
@@ -80,6 +83,7 @@
       "vmware-fusion"
       "bambu-studio"
       "keka"
+      "obsidian"
 
       # Proton Apps
       "proton-drive"
