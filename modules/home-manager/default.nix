@@ -8,8 +8,6 @@
       fd
       curl
       less
-      gnupg
-      pinentry_mac
     ];
     sessionVariables = {
       PAGER = "less";
