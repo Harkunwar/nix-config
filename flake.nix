@@ -13,6 +13,14 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, self, ... }: {
+    nixosConfigurations.node804 = nixpkgs.lib.nixosSystem rec {
+      pkgs = import nixpkgs { inherit system; };
+      system = "x86_64-linux";
+      modules = [ ./configuration.nix
+                  # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
+                  ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
+                ];
+    };
     # MacBookPro15 at the end is my computer name
     darwinConfigurations.MacbookPro14 =
       darwin.lib.darwinSystem {
