@@ -20,20 +20,20 @@
 
     # Espresso drives (Samsung SSDs  960GB)
     "luks-espresso-ata-SAMSUNG_MZ7KM960HAHP-00005_S2HTNX0H626552" = {
-      device = "/dev/disk/by-uuid/725756dc-480b-4be9-a204-a4192f609caf";
+      device = "/dev/disk/by-id/ata-SAMSUNG_MZ7KM960HAHP-00005_S2HTNX0H626552";
       allowDiscards = true;
     };
     "luks-espresso-ata-SAMSUNG_MZ7KM960HAHP-00005_S2HTNX0HB01819" = {
-      device = "/dev/disk/by-uuid/4f18b2a3-30cd-401d-a128-e579de0ef6ec";
+      device = "/dev/disk/by-id/ata-SAMSUNG_MZ7KM960HAHP-00005_S2HTNX0HB01819";
       allowDiscards = true;
     };
 
     # Molasses drives (Seagate HDDs)
     "luks-molasses-ata-ST16000NT001-3LV101_ZR6143T5" = {
-      device = "/dev/disk/by-uuid/f1e9e8c3-23c9-4985-adc7-41e62a5615a9";
+      device = "/dev/disk/by-id/ata-ST16000NT001-3LV101_ZR6143T5";
     };
     "luks-molasses-ata-ST16000NT001-3LV101_ZR70WRGB" = {
-      device = "/dev/disk/by-uuid/40759e67-90af-4b8c-b485-3d32cd0f4ed4";
+      device = "/dev/disk/by-id/ata-ST16000NT001-3LV101_ZR70WRGB";
     };
 
   };
@@ -85,9 +85,11 @@
       options = [ "zfsutil" ];
     };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/f89741dd-0cd2-409e-b7e0-3e881f701c2c"; }
-      { device = "/dev/disk/by-uuid/9d00f87e-ce9d-4549-95b5-4fc361e9d3ac"; }];
+  swapDevices = [ ];
+  # Commented out due to timeout issues - verify UUIDs exist before re-enabling
+  # swapDevices =
+  #   [{ device = "/dev/disk/by-uuid/f89741dd-0cd2-409e-b7e0-3e881f701c2c"; }
+  #     { device = "/dev/disk/by-uuid/9d00f87e-ce9d-4549-95b5-4fc361e9d3ac"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
