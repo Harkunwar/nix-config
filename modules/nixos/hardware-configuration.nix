@@ -69,6 +69,18 @@
       fsType = "zfs";
     };
 
+  fileSystems."/mnt/molasses/time-machine" =
+    {
+      device = "molasses/time-machine";
+      fsType = "zfs";
+    };
+
+  fileSystems."/mnt/molasses/private-media" =
+    {
+      device = "molasses/private-media";
+      fsType = "zfs";
+    };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/f89741dd-0cd2-409e-b7e0-3e881f701c2c"; }
       { device = "/dev/disk/by-uuid/9d00f87e-ce9d-4549-95b5-4fc361e9d3ac"; }];
