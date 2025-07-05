@@ -67,7 +67,7 @@
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
-    masApps = { 
+    masApps = {
       "WireGuard" = 1451685025;
       "Bitwarden" = 1137397744;
     };

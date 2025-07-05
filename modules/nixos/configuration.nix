@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -37,21 +38,21 @@
       members = [ "harkunwar" ];
     };
     storage-users = {
-      gid = 3002; 
-      members = [ "harkunwar" ];  # Add other users here later
+      gid = 3002;
+      members = [ "harkunwar" ]; # Add other users here later
     };
     timemachine-users = {
       gid = 3003;
-      members = [ "harkunwar" ];  # Users allowed to use Time Machine
+      members = [ "harkunwar" ]; # Users allowed to use Time Machine
     };
     # Future groups
     media-users = {
       gid = 3004;
-      members = [ ];  # For media library access
+      members = [ ]; # For media library access
     };
     backup-operators = {
       gid = 3005;
-      members = [ ];  # For backup management
+      members = [ ]; # For backup management
     };
   };
 
@@ -59,22 +60,22 @@
   users.users.harkunwar = {
     isNormalUser = true;
     description = "Harkunwar";
-    extraGroups = [ 
-      "wheel"        # Enable 'sudo' for the user
-      "storage-admin"    # Joining NAS groups
-      "storage-users" 
+    extraGroups = [
+      "wheel" # Enable 'sudo' for the user
+      "storage-admin" # Joining NAS groups
+      "storage-users"
       "timemachine-users"
-      "networkmanager" 
-      "audio" 
-      "video" 
-      "docker"       # If you use Docker
+      "networkmanager"
+      "audio"
+      "video"
+      "docker" # If you use Docker
     ];
-    
+
     # Set up SSH key for the user (same as your initrd key)
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
     ];
-    
+
     # Set a password hash (see below for how to generate)
     hashedPassword = "$6$VUX42OyBWi3l7vWt$M7X2P3BvSojRMvccpK.Ye3Lw7zPTtLbtbmu9O8sVTwklQJiSe/RSK2VMXvOgt1b6jSYjrjl9g3UuHdFeFR2h70"; # Replace with actual hash
   };
@@ -90,18 +91,18 @@
         "server string" = "Node 804 Server";
         "netbios name" = "node804-server";
         security = "user";
-        
+
         # Performance optimizations (these are fine globally)
         "socket options" = "TCP_NODELAY IPTOS_LOWDELAY SO_RCVBUF=524288 SO_SNDBUF=524288";
         "use sendfile" = "yes";
         "aio read size" = 16384;
         "aio write size" = 16384;
-        
+
         # Logging (global is appropriate)
         "log level" = 1;
         "max log size" = 1000;
       };
-      
+
       # Time Machine share - Mac-specific settings HERE
       time-machine = {
         path = "/mnt/molasses/time-machine";
@@ -112,7 +113,7 @@
         "directory mask" = "0770";
         "valid users" = "@timemachine-users";
         "write list" = "@timemachine-users";
-        
+
         # Mac/Time Machine specific settings - ONLY for this share
         "fruit:time machine" = "yes";
         "fruit:time machine max size" = "1T";
@@ -126,7 +127,7 @@
         "vfs objects" = "catia fruit streams_xattr";
         comment = "Time Machine Backups (1TB limit)";
       };
-      
+
       # Regular storage shares - no Mac-specific bloat
       espresso = {
         path = "/mnt/espresso";
@@ -138,10 +139,10 @@
         "valid users" = "@storage-users @storage-admin";
         "write list" = "@storage-users @storage-admin";
         "admin users" = "@storage-admin";
-        "vfs objects" = "acl_xattr";  # No fruit here
+        "vfs objects" = "acl_xattr"; # No fruit here
         comment = "Espresso SSD Storage (Fast Access)";
       };
-      
+
       molasses = {
         path = "/mnt/molasses";
         browseable = "yes";
@@ -152,10 +153,10 @@
         "valid users" = "@storage-users @storage-admin";
         "write list" = "@storage-users @storage-admin";
         "admin users" = "@storage-admin";
-        "vfs objects" = "acl_xattr";  # No fruit here either
+        "vfs objects" = "acl_xattr"; # No fruit here either
         comment = "Molasses HDD Storage (Bulk Storage)";
       };
-      
+
       # Future Mac-friendly media share example
       # media = {
       #   path = "/mnt/molasses/media";
@@ -191,7 +192,7 @@
       userServices = true;
       workstation = true;
     };
-    
+
     extraServiceFiles = {
       smb = ''
         <?xml version="1.0" standalone='no'?>
@@ -222,11 +223,11 @@
   systemd.tmpfiles.rules = [
     # Time Machine - only timemachine-users group access
     "d /mnt/molasses/time-machine 0770 root timemachine-users -"
-    
+
     # Storage directories - storage groups access
     "d /mnt/espresso 0775 root storage-users -"
     "d /mnt/molasses 0775 root storage-users -"
-    
+
     # Future directory structure examples
     # "d /mnt/molasses/media 0775 root media-users -"
     # "d /mnt/molasses/backup 0770 root backup-operators -"
@@ -238,10 +239,10 @@
 
   networking = {
     hostName = "node804"; # Define your hostname
-    
+
     # Disable NetworkManager if you want to use static configuration
     networkmanager.enable = false;
-    
+
     # Configure static IP on enp1s0 interface
     interfaces.enp1s0 = {
       ipv4.addresses = [{
@@ -249,19 +250,19 @@
         prefixLength = 24; # This is /24 or 255.255.255.0
       }];
     };
-    
+
     # Set default gateway
     defaultGateway = "192.168.2.5";
-    
+
     # Set DNS servers
     nameservers = [ "192.168.2.5" ];
-    
+
     # Optional: Enable firewall and open SSH port
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 
+      allowedTCPPorts = [
       ];
-      allowedUDPPorts = [ 
+      allowedUDPPorts = [
       ];
     };
   };
@@ -272,9 +273,9 @@
       # Format: ip=<client-ip>:<server-ip>:<gw-ip>:<netmask>:<hostname>:<device>:<autoconf>:<dns0-ip>:<dns1-ip>
       "ip=192.168.2.101::192.168.2.5:255.255.255.0:nixos:enp1s0:off:192.168.2.5"
     ];
-    initrd.availableKernelModules = [ 
-      "mlx4_core"  # Core driver (what you're currently using)
-      "mlx4_en"    # Ethernet driver for ConnectX-3
+    initrd.availableKernelModules = [
+      "mlx4_core" # Core driver (what you're currently using)
+      "mlx4_en" # Ethernet driver for ConnectX-3
     ];
     initrd.network = {
       # This will use udhcp to get an ip address.
@@ -286,16 +287,16 @@
       udhcpc.enable = false;
       ssh = {
         enable = true;
-      # To prevent ssh clients from freaking out because a different host key is used,
-      # a different port for ssh is useful (assuming the same host has also a regular sshd running)
-        port = 2222; 
-      # hostKeys paths must be unquoted strings, otherwise you'll run into issues with boot.initrd.secrets
-      # the keys are copied to initrd from the path specified; multiple keys can be set
-      # you can generate any number of host keys using 
-      # `ssh-keygen -t ed25519 -N "" -f /path/to/ssh_host_ed25519_key`
+        # To prevent ssh clients from freaking out because a different host key is used,
+        # a different port for ssh is useful (assuming the same host has also a regular sshd running)
+        port = 2222;
+        # hostKeys paths must be unquoted strings, otherwise you'll run into issues with boot.initrd.secrets
+        # the keys are copied to initrd from the path specified; multiple keys can be set
+        # you can generate any number of host keys using 
+        # `ssh-keygen -t ed25519 -N "" -f /path/to/ssh_host_ed25519_key`
         shell = "/bin/cryptsetup-askpass";
         hostKeys = [ /root/.ssh/id_ed25519_initrd ];
-      # public ssh key used for login
+        # public ssh key used for login
         authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com" ];
       };
     };
@@ -327,7 +328,7 @@
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
-  
+
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
