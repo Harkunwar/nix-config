@@ -74,7 +74,6 @@
       device = "molasses/time-machine";
       fsType = "zfs";
       depends = [ "/mnt/molasses" ];
-      options = [ "zfsutil" ];
     };
 
   fileSystems."/mnt/molasses/private-media" =
@@ -82,7 +81,6 @@
       device = "molasses/private-media";
       fsType = "zfs";
       depends = [ "/mnt/molasses" ];
-      options = [ "zfsutil" ];
     };
 
   swapDevices = [ ];
