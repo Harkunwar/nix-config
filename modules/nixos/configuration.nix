@@ -16,7 +16,9 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.zfs.forceImportAll = true;
 
+  services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
 
   services.openssh = {
