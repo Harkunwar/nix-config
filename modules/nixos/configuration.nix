@@ -200,6 +200,7 @@
     accelerationDevices = null; # Set to null to enable all devices
     mediaLocation = "/mnt/molasses/private-media";
     group = "immich";
+    host = "0.0.0.0";
   };
 
   # Avahi configuration (same as before)
