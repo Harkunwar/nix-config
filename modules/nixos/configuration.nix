@@ -45,11 +45,12 @@
       gid = 3003;
       members = [ "harkunwar" ]; # Users allowed to use Time Machine
     };
-    # Future groups
-    media-users = {
+    private-media-users = {
       gid = 3004;
-      members = [ ]; # For media library access
+      members = [ "immich" "harkunwar" ]; # For photos and videos
     };
+
+    # Future groups
     backup-operators = {
       gid = 3005;
       members = [ ]; # For backup management
@@ -157,6 +158,21 @@
         comment = "Molasses HDD Storage (Bulk Storage)";
       };
 
+      private-media = {
+        path = "/mnt/molasses/private-media";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0664";
+        "directory mask" = "0775";
+        "valid users" = "@private-media-users @storage-admin";
+        "write list" = "@private-media-users @storage-admin";
+        "admin users" = "@storage-admin";
+        # Use acl_xattr for permissions
+        "vfs objects" = "acl_xattr";
+        comment = "Private Media Storage (Photos and Videos)";
+      };
+
       # Future Mac-friendly media share example
       # media = {
       #   path = "/mnt/molasses/media";
@@ -177,6 +193,14 @@
     };
   };
 
+  services.immich = {
+    enable = true;
+    openFirewall = true;
+    port = 4664;
+    acceleratedDevices = null; # Set to null to enable all devices
+    mediaLocation = "/mnt/molasses/private-media";
+    group = "immich";
+  };
 
   # Avahi configuration (same as before)
   services.avahi = {
@@ -227,6 +251,9 @@
     # Storage directories - storage groups access
     "d /mnt/espresso 0775 root storage-users -"
     "d /mnt/molasses 0775 root storage-users -"
+
+    # Private media - private-media-users group access
+    "d /mnt/molasses/private-media 0775 root private-media-users -"
 
     # Future directory structure examples
     # "d /mnt/molasses/media 0775 root media-users -"
