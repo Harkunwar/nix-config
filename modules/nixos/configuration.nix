@@ -197,7 +197,7 @@
     enable = true;
     openFirewall = true;
     port = 4664;
-    acceleratedDevices = null; # Set to null to enable all devices
+    accelerationDevices = null; # Set to null to enable all devices
     mediaLocation = "/mnt/molasses/private-media";
     group = "immich";
   };
