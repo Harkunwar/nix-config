@@ -83,12 +83,10 @@
       depends = [ "/mnt/molasses" ];
     };
 
-  swapDevices = [ ];
-  # Commented out due to timeout issues - verify UUIDs exist before re-enabling
-  # swapDevices =
-  #   [{ device = "/dev/disk/by-uuid/f89741dd-0cd2-409e-b7e0-3e881f701c2c"; }
-  #     { device = "/dev/disk/by-uuid/9d00f87e-ce9d-4549-95b5-4fc361e9d3ac"; }];
-
+  swapDevices = [
+    { device = "/dev/disk/by-id/ata-SAMSUNG_MZ7LH480HAHQ-00005_S45PNA0NB21136-part3"; }
+    { device = "/dev/disk/by-id/ata-SAMSUNG_MZ7LH480HAHQ-00005_S45PNA0NB21130-part3"; }
+  ];
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
