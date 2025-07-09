@@ -33,12 +33,17 @@
     isNormalUser = true;
     description = "Harkunwar";
     extraGroups = [ "wheel" ];
-    hashedPassword = "$6$S83jI.k5U0GXmeOj$C75gOCmf4vpaDI5mu9go/aODxgZlh0A7A8gqisSOb2y5g8NvPnBeZaMtCDteyT9OyBsBzJ82mTqHJnLuSofrf/";
+    hashedPassword = "$6$ZXvbEHp7mSf8Nskr$RlWg1tOHwu2wEiRyrsxiByM9RKZie.WTHjQIL7q7lMAqfcm9erusPypnEVxZBZKZwRKcc1.SCtX283EYmllj20";
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
     ]; 
   };
+
+  # security.sudo = {
+  #   enable = true; # Enable the sudo service.
+  #   wheelNeedsPassword = false; # Allow users in the wheel group to run sudo without a password.
+  # };
   environment.systemPackages = with pkgs; [ git vim ];
 
   # Set your time zone.
