@@ -18,6 +18,10 @@
       inherit inputs nixpkgs home-manager;
     };
 
+    nixosConfigurations.racknerd = import ./hosts/racknerd {
+      inherit inputs nixpkgs;
+    };
+
     darwinConfigurations.MacbookPro14 = import ./hosts/macbook-pro-14 {
       inherit inputs nixpkgs home-manager darwin;
     };
