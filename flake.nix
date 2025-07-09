@@ -12,16 +12,31 @@
     # Controls system level software and settings including fonts
     darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Provides a way to manage secrets
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = inputs@{ nixpkgs, home-manager, darwin, self, ... }: {
-    nixosConfigurations.node804 = import ./hosts/node804 {
-      inherit inputs nixpkgs home-manager;
+  outputs = inputs@{ nixpkgs, home-manager, sops-nix, darwin, self, ... }: {
+
+    nixosConfigurations = {
+      # This is the NixOS configuration for the Node804 server
+      # It imports the configuration from the hosts/node804 directory
+      node804 = import ./hosts/node804 {
+        inherit inputs nixpkgs home-manager sops-nix;
+      };
+
+      # This is the NixOS configuration for the Racknerd server
+      # It imports the configuration from the hosts/racknerd directory
+      racknerd = import ./hosts/racknerd {
+        inherit inputs nixpkgs sops-nix;
+      };
     };
 
-    nixosConfigurations.racknerd = import ./hosts/racknerd {
-      inherit inputs nixpkgs;
-    };
-
+    # This is the Darwin configuration for the Macbook Pro 14
+    # It imports the configuration from the hosts/macbook-pro-14 directory
     darwinConfigurations.MacbookPro14 = import ./hosts/macbook-pro-14 {
       inherit inputs nixpkgs home-manager darwin;
     };

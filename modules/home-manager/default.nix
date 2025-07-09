@@ -1,9 +1,9 @@
-({ pkgs, ... }: {
+({ config, pkgs, ... }: {
   # Specify my home-manager configs
   # Guide: https://nix-community.github.io/home-manager/options.html
   home = {
     stateVersion = "24.11";
-    packages = with pkgs; [ 
+    packages = with pkgs; [
       ripgrep
       fd
       curl
@@ -26,6 +26,7 @@
       ".config/zsh/hello_ascii.txt".source = ./dotfiles/config/zsh/hello_ascii.txt;
     };
   };
+
   programs = {
     zoxide = {
       enable = true;
