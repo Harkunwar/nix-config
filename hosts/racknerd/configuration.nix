@@ -33,6 +33,7 @@
     isNormalUser = true;
     description = "Harkunwar";
     extraGroups = [ "wheel" ];
+    hashedPassword = "$6$S83jI.k5U0GXmeOj$C75gOCmf4vpaDI5mu9go/aODxgZlh0A7A8gqisSOb2y5g8NvPnBeZaMtCDteyT9OyBsBzJ82mTqHJnLuSofrf/";
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
