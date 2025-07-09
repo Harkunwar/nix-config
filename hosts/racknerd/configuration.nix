@@ -29,16 +29,16 @@
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # users.users.nixos.isNormalUser = true;
-  users.users.harkunwar = {
-    isNormalUser = true;
-    description = "Harkunwar";
-    extraGroups = [ "wheel" ];
-    hashedPassword = "$6$..PC1mscayxni18U$kkhh5U1UvTVbiA1rz11JEBQ3XiYsROpmjTQlwDDZyH/8ljhJnhFrJeAivX0s8lW5qmuR./RTBFeh9.vUQPLzr/";
+  # users.users.harkunwar = {
+  #   isNormalUser = true;
+  #   description = "Harkunwar";
+  #   extraGroups = [ "wheel" ];
+  #   hashedPassword = "$6$..PC1mscayxni18U$kkhh5U1UvTVbiA1rz11JEBQ3XiYsROpmjTQlwDDZyH/8ljhJnhFrJeAivX0s8lW5qmuR./RTBFeh9.vUQPLzr/";
 
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
-    ]; 
-  };
+  #   openssh.authorizedKeys.keys = [
+  #     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
+  #   ]; 
+  # };
 
   # security.sudo = {
   #   enable = true; # Enable the sudo service.
