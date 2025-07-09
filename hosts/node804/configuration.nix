@@ -9,10 +9,11 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./services/immich.nix
+      ./services/openssh.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -21,15 +22,6 @@
 
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
-
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PasswordAuthentication = true;
-      PermitRootLogin = "no";
-    };
-  };
 
   users.groups = {
     # Storage access groups
@@ -191,16 +183,6 @@
       #   comment = "Media Library";
       # };
     };
-  };
-
-  services.immich = {
-    enable = true;
-    openFirewall = true;
-    port = 4664;
-    accelerationDevices = null; # Set to null to enable all devices
-    mediaLocation = "/mnt/molasses/private-media";
-    group = "immich";
-    host = "0.0.0.0";
   };
 
   # Avahi configuration (same as before)
