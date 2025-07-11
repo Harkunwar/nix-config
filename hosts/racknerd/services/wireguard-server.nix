@@ -1,15 +1,15 @@
 { config, pkgs, ... }:
 {
   sops.secrets = {
-    "wireguard.wg0.server.private" = {
+    "wgprivate" = {
         owner = "systemd-network";
         group = "systemd-network";
         mode = "0400";
         sopsFile = ../../../secrets/racknerd.yaml;
     };
-    "wireguard.wg0.server.public" = {
-        sopsFile = ../../../secrets/racknerd.yaml;
-    };
+    # "wireguard.wg0.server.public" = {
+    #     sopsFile = ../../../secrets/racknerd.yaml;
+    # };
     # "wireguard.wg0.clients.iphone12pro.private" = {
     #     mode = "0444";
     #     sopsFile = ../../../secrets/racknerd.yaml;
@@ -72,7 +72,7 @@
       '';
 
       # Path to the private key file managed by sops
-      privateKeyFile = config.sops.secrets."wireguard.wg0.server.private".path;
+      privateKeyFile = config.sops.secrets."wgprivate".path;
     };
   };
 
