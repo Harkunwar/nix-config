@@ -57,7 +57,6 @@
           allowedIPs = [ "10.100.0.2/32" ];
         }
       ];
-      '';
       # This undoes the above command
       postShutdown = ''
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
