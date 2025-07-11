@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 
 let
-  iphone12ProPublicKey = "+379Fqfb7hvrAxv9FAKVPHBmVzRppWmCxPaa6FMzYFw=";
   wg0ServerPublicKey = "/GmQTUpinK8gpnqJqI51CpNjErXdyszO8UnkDSiUzyg=";
+  iphone12ProPublicKey = "+379Fqfb7hvrAxv9FAKVPHBmVzRppWmCxPaa6FMzYFw=";
+  macbookPro14PublicKey = "C9iwII6H0BpSXIkJmrnE0twOvcxThoOLn2qSU6BVxkY=";
 in
 {
   sops.secrets = {
@@ -16,6 +17,10 @@ in
         mode = "0444";
         sopsFile = ../../../secrets/racknerd.yaml;
     };
+    "wireguard/wg0/clients/macbookpro14/private" = {
+        mode = "0444";
+        sopsFile = ../../../secrets/racknerd.yaml;
+    };
     "ip" = {
         sopsFile = ../../../secrets/racknerd.yaml;
     };
@@ -26,6 +31,25 @@ in
     content = ''
       [Interface]
       PrivateKey = ${config.sops.placeholder."wireguard/wg0/clients/iphone12pro/private"}
+      Address = 10.100.0.2/32
+      DNS = 8.8.8.8, 1.1.1.1
+
+      [Peer]
+      PublicKey = ${wg0ServerPublicKey}
+      AllowedIPs = 0.0.0.0/0
+      Endpoint = ${config.sops.placeholder."ip"}:61899
+      PersistentKeepalive = 25
+    '';
+    owner = "harkunwar";
+    group = "users";
+    mode = "0644";
+  };
+
+    # Sops template for Macbook Pro 14 client configuration
+  sops.templates."wireguard-macbookpro14.conf" = {
+    content = ''
+      [Interface]
+      PrivateKey = ${config.sops.placeholder."wireguard/wg0/clients/macbookpro14/private"}
       Address = 10.100.0.2/32
       DNS = 8.8.8.8, 1.1.1.1
 
