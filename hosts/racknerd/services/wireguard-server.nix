@@ -8,9 +8,6 @@
         sopsFile = ../../../secrets/racknerd.yaml;
     };
     "wireguard.wg0.server.public" = {
-        owner = "systemd-network";
-        group = "systemd-network";
-        mode = "0444";
         sopsFile = ../../../secrets/racknerd.yaml;
     };
     "wireguard.wg0.clients.iphone12pro.private" = {
@@ -18,7 +15,6 @@
         sopsFile = ../../../secrets/racknerd.yaml;
     };
     "wireguard.wg0.clients.iphone12pro.public" = {
-        mode = "0444";
         sopsFile = ../../../secrets/racknerd.yaml;
     };
     "ip" = {
