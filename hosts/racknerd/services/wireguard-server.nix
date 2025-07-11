@@ -40,6 +40,11 @@ in
     mode = "0644";
   };
 
+
+  networking.nat.enable = true;
+  networking.nat.externalInterface = "ens3";
+  networking.nat.internalInterfaces = [ "wg0" ];
+
   # WireGuard VPN Configuration
   networking.wireguard.interfaces = {
     wg0 = {
