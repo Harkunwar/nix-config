@@ -84,6 +84,10 @@ in
           publicKey = iphone12ProPublicKey;
           allowedIPs = [ "10.100.0.2/32" ];
         }
+        { 
+          publicKey = macbookPro14PublicKey;
+          allowedIPs = [ "10.100.0.3/32" ];
+        }
       ];
 
       # Add missing postSetup
