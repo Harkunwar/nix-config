@@ -1,20 +1,20 @@
 { config, pkgs, ... }:
 {
   sops.secrets = {
-    "wireguard.wg0.server.private" = {
+    "wireguard/wg0/server/private" = {
         owner = "systemd-network";
         group = "systemd-network";
         mode = "0400";
         sopsFile = ../../../secrets/racknerd.yaml;
     };
-    "wireguard.wg0.server.public" = {
+    "wireguard/wg0/server/public" = {
         sopsFile = ../../../secrets/racknerd.yaml;
     };
-    "wireguard.wg0.clients.iphone12pro.private" = {
+    "wireguard/wg0/clients/iphone12pro/private" = {
         mode = "0444";
         sopsFile = ../../../secrets/racknerd.yaml;
     };
-    "wireguard.wg0.clients.iphone12pro.public" = {
+    "wireguard/wg0/clients/iphone12pro/public" = {
         sopsFile = ../../../secrets/racknerd.yaml;
     };
     "ip" = {
@@ -26,12 +26,12 @@
   sops.templates."wireguard-iphone12pro.conf" = {
     content = ''
       [Interface]
-      PrivateKey = ${config.sops.placeholder."wireguard.wg0.clients.iphone12pro.private"}
+      PrivateKey = ${config.sops.placeholder."wireguard/wg0/clients/iphone12pro/private"}
       Address = 10.100.0.2/32
       DNS = 8.8.8.8, 1.1.1.1
 
       [Peer]
-      PublicKey = ${config.sops.placeholder."wireguard.wg0.server.public"}
+      PublicKey = ${config.sops.placeholder."wireguard/wg0/server/public"}
       AllowedIPs = 0.0.0.0/0
       Endpoint = ${config.sops.placeholder."ip"}:61899
       PersistentKeepalive = 25
@@ -51,18 +51,13 @@
       listenPort = 61899;
 
       # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
-      postSetup = ''
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-        ${pkgs.iptables}/bin/iptables -A INPUT -p udp --dport 61899 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -A FORWARD -o wg0 -j ACCEPT
-
-        # Post setup command to add clients
-        
+      peers = [
+        { 
+          publicKey = "$(cat ${config.sops.secrets."wireguard/wg0/clients/iphone12pro/public".path})";
+          allowedIPs = [ "10.100.0.2/32" ];
+        }
+      ];
       '';
-
-
- # ${pkgs.wireguard-tools}/bin/wg set wg0 peer $(cat ${config.sops.secrets."wireguard.wg0.clients.iphone12pro.public".path}) allowed-ips 10.100.0.2/32
       # This undoes the above command
       postShutdown = ''
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
@@ -72,15 +67,7 @@
       '';
 
       # Path to the private key file managed by sops
-      privateKeyFile = config.sops.secrets."wireguard.wg0.server.private".path;
-
-      # peers = [
-      #   { 
-      #     # iPhone 12 Pro - read public key from sops secret
-      #     publicKey = builtins.readFile config.sops.secrets."wireguard.wg0.clients.iphone12pro.public".path;
-      #     allowedIPs = [ "10.100.0.2/32" ];
-      #   }
-      # ];
+      privateKeyFile = config.sops.secrets."wireguard/wg0/server/private".path;
     };
   };
 
