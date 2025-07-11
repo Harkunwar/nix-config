@@ -30,9 +30,6 @@
         };
       };
     };
-    
-    # Use credentialsFile for sensitive tokens
-    credentialsFile = "/var/lib/secrets/rathole/server-secrets.toml";
   };
 
   # Open firewall for rathole
