@@ -50,7 +50,7 @@ in
     content = ''
       [Interface]
       PrivateKey = ${config.sops.placeholder."wireguard/wg0/clients/macbookpro14/private"}
-      Address = 10.100.0.2/32
+      Address = 10.100.0.3/32
       DNS = 8.8.8.8, 1.1.1.1
 
       [Peer]
