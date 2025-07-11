@@ -58,9 +58,11 @@
         ${pkgs.iptables}/bin/iptables -A FORWARD -o wg0 -j ACCEPT
 
         # Post setup command to add clients
-        ${pkgs.wireguard-tools}/bin/wg set wg0 peer $(cat ${config.sops.secrets."wireguard.wg0.clients.iphone12pro.public".path}) allowed-ips 10.100.0.2/32
+        
       '';
 
+
+ # ${pkgs.wireguard-tools}/bin/wg set wg0 peer $(cat ${config.sops.secrets."wireguard.wg0.clients.iphone12pro.public".path}) allowed-ips 10.100.0.2/32
       # This undoes the above command
       postShutdown = ''
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
