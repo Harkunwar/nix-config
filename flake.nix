@@ -25,13 +25,13 @@
       # This is the NixOS configuration for the Node804 server
       # It imports the configuration from the hosts/node804 directory
       node804 = import ./hosts/node804 {
-        inherit inputs nixpkgs home-manager sops-nix;
+        inherit inputs nixpkgs home-manager;
       };
 
       # This is the NixOS configuration for the Racknerd server
       # It imports the configuration from the hosts/racknerd directory
       racknerd = import ./hosts/racknerd {
-        inherit inputs nixpkgs sops-nix;
+        inherit inputs nixpkgs;
       };
     };
 
