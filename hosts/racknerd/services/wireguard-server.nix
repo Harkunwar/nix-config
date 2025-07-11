@@ -1,4 +1,9 @@
 { config, pkgs, ... }:
+
+let
+  iphone12ProPublicKey = "+379Fqfb7hvrAxv9FAKVPHBmVzRppWmCxPaa6FMzYFw=";
+  wg0ServerPublicKey = "/GmQTUpinK8gpnqJqI51CpNjErXdyszO8UnkDSiUzyg=";
+in
 {
   sops.secrets = {
     "wireguard/wg0/server/private" = {
@@ -7,14 +12,8 @@
         mode = "0400";
         sopsFile = ../../../secrets/racknerd.yaml;
     };
-    "wireguard/wg0/server/public" = {
-        sopsFile = ../../../secrets/racknerd.yaml;
-    };
     "wireguard/wg0/clients/iphone12pro/private" = {
         mode = "0444";
-        sopsFile = ../../../secrets/racknerd.yaml;
-    };
-    "wireguard/wg0/clients/iphone12pro/public" = {
         sopsFile = ../../../secrets/racknerd.yaml;
     };
     "ip" = {
@@ -31,7 +30,7 @@
       DNS = 8.8.8.8, 1.1.1.1
 
       [Peer]
-      PublicKey = ${config.sops.placeholder."wireguard/wg0/server/public"}
+      PublicKey = ${wg0ServerPublicKey}
       AllowedIPs = 0.0.0.0/0
       Endpoint = ${config.sops.placeholder."ip"}:61899
       PersistentKeepalive = 25
@@ -53,10 +52,19 @@
       # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
       peers = [
         { 
-          publicKey = "$(cat ${config.sops.secrets."wireguard/wg0/clients/iphone12pro/public".path})";
+          publicKey = iphone12ProPublicKey;
           allowedIPs = [ "10.100.0.2/32" ];
         }
       ];
+
+      # Add missing postSetup
+      postSetup = ''
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -A INPUT -p udp --dport 61899 -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -A FORWARD -o wg0 -j ACCEPT
+      '';
+
       # This undoes the above command
       postShutdown = ''
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
