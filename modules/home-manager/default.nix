@@ -14,7 +14,6 @@
       CLICOLOR = 1;
       EDITOR = "hx";
       DIRENV_LOG_FORMAT = "";
-      SOPS_AGE_KEY_FILE = "~/.config/sops/age/keys.txt";
     };
     file = {
       ".inputrc".source = ./dotfiles/inputrc;
@@ -117,6 +116,8 @@
         fi
 
         echo "$(cat $HOME/.config/zsh/hello_ascii.txt)"
+
+        export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
       '';
       shellAliases = {
         ls = "ls --color=auto -F";

@@ -1,12 +1,23 @@
 keys:
-  - &age_public_key age12wncach0d3tapa5km0w8hd6pgpsyw8vjqrm6uv55r5lzjlwcvuwqt9dnzk
+  - &users:
+    - &admin_age age1rjzjwv3puz9uhej28rphkvc3vus2lufe8t86y2k37ux2vgc34gtqwfuutx
+  - &hosts:
+    # - &macbook_pro_age age12wncach0d3tapa5km0w8hd6pgpsyw8vjqrm6uv55r5lzjlwcvuwqt9dnzk
+    - &racknerd_age age1zwlgtev8hw9dtjkx2sqttvzd0nsl9x68y6sq6q5f3nzvc0smlejs8n5jmn
 
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  - path_regex: secrets/racknerd.yaml$
     key_groups:
     - age:
-      - *age_public_key
-  - path_regex: secrets/[^/]+\.json$
+      - *admin_age
+      - *racknerd_age
+  - path_regex: secrets/rathole.yaml$
     key_groups:
     - age:
-      - *age_public_key
+      - *admin_age
+      - *racknerd_age
+  # In case you need to add JSON later
+  # - path_regex: secrets/[^/]+\.json$
+  #   key_groups:
+  #   - age:
+  #     - *unlocks_all_age_key
