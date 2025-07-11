@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   sops.secrets = {
-    "wireguard.private" = {
+    "wireguard.wg0.server.private" = {
         owner = "systemd-network";
         group = "systemd-network";
         mode = "0400";
@@ -72,7 +72,7 @@
       '';
 
       # Path to the private key file managed by sops
-      privateKeyFile = config.sops.secrets."wireguard.private".path;
+      privateKeyFile = config.sops.secrets."wireguard.wg0.server.private".path;
     };
   };
 
