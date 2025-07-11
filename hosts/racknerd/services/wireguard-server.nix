@@ -10,36 +10,36 @@
     "wireguard.wg0.server.public" = {
         sopsFile = ../../../secrets/racknerd.yaml;
     };
-    "wireguard.wg0.clients.iphone12pro.private" = {
-        mode = "0444";
-        sopsFile = ../../../secrets/racknerd.yaml;
-    };
-    "wireguard.wg0.clients.iphone12pro.public" = {
-        sopsFile = ../../../secrets/racknerd.yaml;
-    };
+    # "wireguard.wg0.clients.iphone12pro.private" = {
+    #     mode = "0444";
+    #     sopsFile = ../../../secrets/racknerd.yaml;
+    # };
+    # "wireguard.wg0.clients.iphone12pro.public" = {
+    #     sopsFile = ../../../secrets/racknerd.yaml;
+    # };
     "ip" = {
         sopsFile = ../../../secrets/racknerd.yaml;
     };
   };
 
   # Sops template for iPhone client configuration
-  sops.templates."wireguard-iphone12pro.conf" = {
-    content = ''
-      [Interface]
-      PrivateKey = ${config.sops.placeholder."wireguard.wg0.clients.iphone12pro.private"}
-      Address = 10.100.0.2/32
-      DNS = 8.8.8.8, 1.1.1.1
+  # sops.templates."wireguard-iphone12pro.conf" = {
+  #   content = ''
+  #     [Interface]
+  #     PrivateKey = ${config.sops.placeholder."wireguard.wg0.clients.iphone12pro.private"}
+  #     Address = 10.100.0.2/32
+  #     DNS = 8.8.8.8, 1.1.1.1
 
-      [Peer]
-      PublicKey = ${config.sops.placeholder."wireguard.wg0.server.public"}
-      AllowedIPs = 0.0.0.0/0
-      Endpoint = ${config.sops.placeholder."ip"}:61899
-      PersistentKeepalive = 25
-    '';
-    owner = "harkunwar";
-    group = "users";
-    mode = "0644";
-  };
+  #     [Peer]
+  #     PublicKey = ${config.sops.placeholder."wireguard.wg0.server.public"}
+  #     AllowedIPs = 0.0.0.0/0
+  #     Endpoint = ${config.sops.placeholder."ip"}:61899
+  #     PersistentKeepalive = 25
+  #   '';
+  #   owner = "harkunwar";
+  #   group = "users";
+  #   mode = "0644";
+  # };
 
   # WireGuard VPN Configuration
   networking.wireguard.interfaces = {
