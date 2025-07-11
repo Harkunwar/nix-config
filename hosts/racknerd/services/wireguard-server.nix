@@ -60,17 +60,11 @@ in
       # Add missing postSetup
       postSetup = ''
         ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-        ${pkgs.iptables}/bin/iptables -A INPUT -p udp --dport 61899 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -A FORWARD -o wg0 -j ACCEPT
       '';
 
       # This undoes the above command
       postShutdown = ''
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-        ${pkgs.iptables}/bin/iptables -D INPUT -p udp --dport 61899 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -i wg0 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -o wg0 -j ACCEPT
       '';
 
       # Path to the private key file managed by sops
@@ -82,8 +76,10 @@ in
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = 1;
 
-  # Open WireGuard port in firewall
-  networking.firewall.allowedUDPPorts = [ 61899 ];
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ 61899 ];
+  };
 
 }
 
