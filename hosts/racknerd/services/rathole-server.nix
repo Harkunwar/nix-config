@@ -8,7 +8,7 @@
     
     settings = {
       server = {
-        bind_addr = "0.0.0.0:2333";
+        bind_addr = "0.0.0.0:4664";
         services = {
           immich = {
             token = "your-secure-token-here";

@@ -14,6 +14,7 @@
       CLICOLOR = 1;
       EDITOR = "hx";
       DIRENV_LOG_FORMAT = "";
+      SOPS_AGE_KEY_FILE = "~/.config/sops/age/keys.txt";
     };
     file = {
       ".inputrc".source = ./dotfiles/inputrc;
