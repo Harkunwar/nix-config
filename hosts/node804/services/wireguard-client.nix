@@ -44,4 +44,10 @@ in
 
   # Set DNS to use the same as other clients
   networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+
+  # Open ports 80 and 443 for incoming forwarded traffic
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 ];
+  };
 }
