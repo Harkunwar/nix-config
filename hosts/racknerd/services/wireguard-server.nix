@@ -143,8 +143,8 @@ in
         
         # Remove forward rules
         ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.101 --dport 80 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.101 --dport 443 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -s 10.100.0.101 --sport 80 -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.101 --dport 443 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -s 10.100.0.101 --sport 443 -j ACCEPT
       '';
 
