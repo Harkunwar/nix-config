@@ -21,17 +21,15 @@
 
     # Global configuration for Cloudflare DNS challenge
     globalConfig = ''
-      {
-        log default {
-          output file /var/log/caddy/access.log {
-            roll_size 10mb
-            roll_keep 5
-          }
-          format console
+      log default {
+        output file /var/log/caddy/access.log {
+          roll_size 10mb
+          roll_keep 5
         }
-        
-        acme_dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
+        format console
       }
+      
+      acme_dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
     '';
 
     virtualHosts = {
