@@ -3,6 +3,7 @@ nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
   pkgs = import nixpkgs { inherit system; };
   modules = [
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/security/pocket-id.nix"
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
     ./configuration.nix
