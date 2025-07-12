@@ -105,23 +105,23 @@ in
       #   iptables -t nat -D POSTROUTING -d 10.100.0.101 -p tcp --dport 443 -j MASQUERADE 2>/dev/null || true
       # '';
 
-      forwardPorts = [
-        {
-          destination = "10.100.0.101:80";
-          proto = "tcp";
-          sourcePort = 80;
-        }
-        {
-          destination = "10.100.0.101:443";
-          proto = "tcp";
-          sourcePort = 443;
-        }
-        {
-          destination = "10.100.0.101:443";
-          proto = "tcp";
-          sourcePort = 4664;
-        }
-      ];
+      # forwardPorts = [
+      #   {
+      #     destination = "10.100.0.101:80";
+      #     proto = "tcp";
+      #     sourcePort = 80;
+      #   }
+      #   {
+      #     destination = "10.100.0.101:443";
+      #     proto = "tcp";
+      #     sourcePort = 443;
+      #   }
+      #   {
+      #     destination = "10.100.0.101:443";
+      #     proto = "tcp";
+      #     sourcePort = 4664;
+      #   }
+      # ];
     };
   };
 
