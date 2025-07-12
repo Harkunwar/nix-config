@@ -10,7 +10,6 @@ nixpkgs.lib.nixosSystem rec {
     ./configuration.nix
     ./services/wireguard-client.nix
     ./services/pocketid.nix
-    ./services/caddy.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
     ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
     # Make unstable packages available

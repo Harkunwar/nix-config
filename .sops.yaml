@@ -23,8 +23,10 @@ creation_rules:
     - age:
       - *admin_age
       - *node804_age
+      - *racknerd_age
   - path_regex: secrets/pocketid.yaml$
     key_groups:
     - age:
       - *admin_age
       - *node804_age
+      - *racknerd_age

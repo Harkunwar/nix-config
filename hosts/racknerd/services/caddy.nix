@@ -38,7 +38,7 @@
             dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
           }
           
-          reverse_proxy 127.0.0.1:4664 {
+          reverse_proxy 10.100.0.101:4664 {
             header_up Host {upstream_hostport}
             header_up X-Real-IP {remote_host}
             header_up X-Forwarded-For {remote_host}
@@ -54,7 +54,7 @@
             dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
           }
           
-          reverse_proxy 127.0.0.1:1441 {
+          reverse_proxy 10.100.0.101:1441 {
             header_up Host {upstream_hostport}
             header_up X-Real-IP {remote_host}
             header_up X-Forwarded-For {remote_host}
@@ -62,13 +62,6 @@
           }
         '';
       };
-      
-      # Template for future services
-      # "nextcloud.lab.harkunwar.com" = {
-      #   extraConfig = ''
-      #     reverse_proxy 127.0.0.1:8081
-      #   '';
-      # };
     };
   };
 
@@ -79,7 +72,7 @@
 
   # Open firewall ports
   networking.firewall = {
-    allowedTCPPorts = [ 80 443 4664 ];
+    allowedTCPPorts = [ 80 443 ];
   };
 
   # Enable automatic HTTPS with Let's Encrypt
