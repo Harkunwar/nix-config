@@ -3,7 +3,7 @@
   services.caddy = {
     enable = true;
 
-    ackage = pkgs.caddy.withPlugins {
+    package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/cloudflare@35fb8474f57d7476329f75d63eebafb95a93022f" ];
       hash = "sha256-F/jqR4iEsklJFycTjSaW8B/V3iTGqqGOzwYBUXxRKrc=";
     };
