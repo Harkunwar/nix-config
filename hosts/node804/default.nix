@@ -1,5 +1,6 @@
 { inputs, nixpkgs, nixpkgs-unstable, home-manager, ... }:
 nixpkgs.lib.nixosSystem rec {
+  system = "x86_64-linux";
       specialArgs = {
           # To use packages from nixpkgs-stable,
           # we configure some parameters for it first
