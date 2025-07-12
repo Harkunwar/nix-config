@@ -27,6 +27,7 @@
     virtualHosts = {
       # HTTPS with Cloudflare DNS challenge
       "immich.lab.harkunwar.com" = {
+        listenAddresses = [ "0.0.0.0" ];
         extraConfig = ''
           tls {
             dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}

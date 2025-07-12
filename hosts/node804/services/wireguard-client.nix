@@ -49,6 +49,6 @@ in
   # Open ports 80 and 443 for Caddy
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [ 80 443 4664 ];
   };
 }
