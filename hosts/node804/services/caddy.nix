@@ -4,7 +4,7 @@
     enable = true;
 
     package = pkgs.caddy.withPlugins {
-      plugins = [ "github.com/caddy-dns/cloudflare@35fb8474f57d7476329f75d63eebafb95a93022f" ];
+      plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2-0.20250506153119-35fb8474f57d" ];
       hash = "sha256-xMxNAg08LDVifhsryGXV22LXqgRDdfjmsU0NfbUJgMg=";
     };
 
