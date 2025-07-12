@@ -1,12 +1,11 @@
 { config, pkgs, ... }:
-
 {
   services.caddy = {
     enable = true;
     virtualHosts = {
       "immich.lab.harkunwar.com" = {
         extraConfig = ''
-          reverse_proxy 127.0.0.1:8080
+          reverse_proxy 127.0.0.1:4664
           
           # Optional: Add headers for better proxying
           header_up Host {upstream_hostport}
@@ -26,8 +25,8 @@
   };
 
   # Enable automatic HTTPS with Let's Encrypt
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "your-email@example.com";
-  };
+  # security.acme = {
+  #   acceptTerms = true;
+  #   defaults.email = "your-email@example.com";
+  # };
 }
