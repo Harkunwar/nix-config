@@ -12,7 +12,7 @@
     };
 
     services.pocket-id = {
-        enable = true;
+        enable = false;
         settings = {
             TRUST_PROXY = true;
             PUBLIC_APP_URL = "https://pocketid.lab.harkunwar.com";
