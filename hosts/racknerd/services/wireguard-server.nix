@@ -30,21 +30,21 @@ in
 {
   sops.secrets = {
     "wireguard/wg0/server/private" = {
-        owner = "systemd-network";
-        group = "systemd-network";
-        mode = "0400";
-        sopsFile = ../../../secrets/wireguard.yaml;
+      owner = "systemd-network";
+      group = "systemd-network";
+      mode = "0400";
+      sopsFile = ../../../secrets/wireguard.yaml;
     };
     "wireguard/wg0/clients/iphone12pro/private" = {
-        mode = "0444";
-        sopsFile = ../../../secrets/wireguard.yaml;
+      mode = "0444";
+      sopsFile = ../../../secrets/wireguard.yaml;
     };
     "wireguard/wg0/clients/macbookpro14/private" = {
-        mode = "0444";
-        sopsFile = ../../../secrets/wireguard.yaml;
+      mode = "0444";
+      sopsFile = ../../../secrets/wireguard.yaml;
     };
     "ip" = {
-        sopsFile = ../../../secrets/wireguard.yaml;
+      sopsFile = ../../../secrets/wireguard.yaml;
     };
   };
 
@@ -67,7 +67,7 @@ in
     mode = "0644";
   };
 
-    # Sops template for Macbook Pro 14 client configuration
+  # Sops template for Macbook Pro 14 client configuration
   sops.templates."wireguard-macbookpro14.conf" = {
     content = ''
       [Interface]
@@ -104,13 +104,13 @@ in
       peers = [
         {
           publicKey = node804PublicKey;
-          allowedIPs = [ "10.100.0.101/32" ]
+          allowedIPs = [ "10.100.0.101/32" ];
         }
-        { 
+        {
           publicKey = iphone12ProPublicKey;
           allowedIPs = [ "10.100.0.2/32" ];
         }
-        { 
+        {
           publicKey = macbookPro14PublicKey;
           allowedIPs = [ "10.100.0.3/32" ];
         }
