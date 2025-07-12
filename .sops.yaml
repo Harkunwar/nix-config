@@ -17,6 +17,7 @@ creation_rules:
     - age:
       - *admin_age
       - *racknerd_age
+      - *node804_age
   - path_regex: secrets/cloudflare.yaml$
     key_groups:
     - age:

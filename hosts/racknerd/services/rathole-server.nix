@@ -3,21 +3,21 @@
 {
   sops = {
     secrets = {
-      "tokens/node804".sopsFile = ../../../secrets/rathole.yaml;
-      "tokens/vaultwarden".sopsFile = ../../../secrets/rathole.yaml;
+      "tokens/node804-http".sopsFile = ../../../secrets/rathole.yaml;
+      "tokens/node804-https".sopsFile = ../../../secrets/rathole.yaml;
     };
     templates = {
       "rathole-server.toml".content = ''
         [server]
         bind_addr = "0.0.0.0:2333"
 
-        [server.services.node804]
-        token = "${config.sops.placeholder."tokens/node804"}"
-        bind_addr = "127.0.0.1:6765"
+        [server.services.node804-http]
+        token = "${config.sops.placeholder."tokens/node804-http"}"
+        bind_addr = "0.0.0.0:80"
 
-        [server.services.vaultwarden]
-        token = "${config.sops.placeholder."tokens/vaultwarden"}"
-        bind_addr = "127.0.0.1:8222"
+        [server.services.node804-https]
+        token = "${config.sops.placeholder."tokens/node804-https"}"
+        bind_addr = "0.0.0.0:443"
       '';
     };
   };
