@@ -18,6 +18,9 @@
             PUBLIC_APP_URL = "https://pocketid.lab.harkunwar.com";
             APP_URL = "https://pocketid.lab.harkunwar.com";
             PORT = 1411;
+            INTERNAL_BACKEND_URL = "http://localhost:1412";
+            BACKEND_PORT = 1412;
+
         };
         environmentFile = "${config.sops.templates."pocketid-env".path}";
     };
