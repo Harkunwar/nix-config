@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 {
     sops = {
         secrets = {
@@ -13,7 +13,7 @@
 
     services.pocket-id = {
         enable = true;
-        package = pkgs.pocket-id;
+        package = pkgs-unstable.pocket-id;
         settings = {
             PUBLIC_APP_URL = "http://192.168.2.101";
             APP_URL = "http://192.168.2.101";

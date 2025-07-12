@@ -4,6 +4,7 @@
     # Where we get most of our software. Giant mono repo with recipes
     # called derivations that saw how to build software
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Manages configs and links them to your home directory
     home-manager.url = "github:nix-community/home-manager/release-25.05";
@@ -19,19 +20,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ nixpkgs, home-manager, sops-nix, darwin, self, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, sops-nix, darwin, nixpkgs-unstable, self, ... }: {
 
     nixosConfigurations = {
       # This is the NixOS configuration for the Node804 server
       # It imports the configuration from the hosts/node804 directory
       node804 = import ./hosts/node804 {
-        inherit inputs nixpkgs home-manager;
+        inherit inputs nixpkgs nixpkgs-unstable home-manager;
       };
 
       # This is the NixOS configuration for the Racknerd server
       # It imports the configuration from the hosts/racknerd directory
       racknerd = import ./hosts/racknerd {
-        inherit inputs nixpkgs;
+        inherit inputs nixpkgs nixpkgs-unstable;
       };
     };
 
