@@ -6,6 +6,7 @@ nixpkgs.lib.nixosSystem rec {
   modules = [
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
+    ../common/core/openssh.nix
     ./configuration.nix
     ./services/pocketid.nix
     ./services/caddy.nix

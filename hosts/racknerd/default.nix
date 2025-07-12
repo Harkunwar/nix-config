@@ -5,6 +5,7 @@ nixpkgs.lib.nixosSystem rec {
   modules = [
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
+    ../common/core/openssh.nix
     ./configuration.nix
     ./services/wireguard-server.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs

@@ -6,13 +6,10 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
-  services.openssh.enable = true;
-  services.openssh.openFirewall = true;
-  services.fail2ban.enable = true;
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -36,7 +33,7 @@
     hashedPassword = "$6$..PC1mscayxni18U$kkhh5U1UvTVbiA1rz11JEBQ3XiYsROpmjTQlwDDZyH/8ljhJnhFrJeAivX0s8lW5qmuR./RTBFeh9.vUQPLzr/";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
-    ]; 
+    ];
   };
 
   # security.sudo = {
@@ -64,7 +61,7 @@
   # services.xserver.enable = true;
 
 
-  
+
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -111,9 +108,6 @@
   # };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
