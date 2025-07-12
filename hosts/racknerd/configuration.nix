@@ -36,6 +36,18 @@
     ];
   };
 
+  security.sudo.extraRules = [
+    {
+      users = [ "harkunwar" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "SETENV" "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   # security.sudo = {
   #   enable = true; # Enable the sudo service.
   #   wheelNeedsPassword = false; # Allow users in the wheel group to run sudo without a password.

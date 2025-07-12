@@ -74,6 +74,18 @@
     hashedPassword = "$6$VUX42OyBWi3l7vWt$M7X2P3BvSojRMvccpK.Ye3Lw7zPTtLbtbmu9O8sVTwklQJiSe/RSK2VMXvOgt1b6jSYjrjl9g3UuHdFeFR2h70"; # Replace with actual hash
   };
 
+  security.sudo.extraRules = [
+    {
+      users = [ "harkunwar" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "SETENV" "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   # Enable Samba services with group-based access
   services.samba = {
     enable = true;
