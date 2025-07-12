@@ -30,7 +30,7 @@ in
             publicKey = wg0ServerPublicKey;
 
             # Route all traffic through VPN (like iPhone/MacBook)
-            allowedIPs = [ "10.0.0.1/24" ];
+            allowedIPs = [ "10.100.0.0/24" ];
 
             endpoint = "lab.harkunwar.com:61899";
 
