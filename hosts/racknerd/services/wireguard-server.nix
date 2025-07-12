@@ -93,19 +93,17 @@ in
       externalInterface = "ens3";
       internalInterfaces = [ "wg0" ];
 
-        extraCommands = ''
-          # Allow hairpin NAT for local connections
-            iptables -t nat -A POSTROUTING -d 10.100.0.101 -p tcp --dport 80 -j MASQUERADE
-            iptables -t nat -A POSTROUTING -d 10.100.0.101 -p tcp --dport 443 -j MASQUERADE  
-            iptables -t nat -A POSTROUTING -d 10.100.0.101 -p tcp --dport 4664 -j MASQUERADE
-        '';
+      extraCommands = ''
+        # SNAT rules
+        iptables -t nat -A POSTROUTING -d 10.100.0.101 -p tcp --dport 80 -j MASQUERADE
+        iptables -t nat -A POSTROUTING -d 10.100.0.101 -p tcp --dport 443 -j MASQUERADE
+      '';
 
-        extraStopCommands = ''
-          # Clean up SNAT rules
-          iptables -t nat -D POSTROUTING -d 10.100.0.101 -p tcp --dport 80 -j MASQUERADE 2>/dev/null || true
-          iptables -t nat -D POSTROUTING -d 10.100.0.101 -p tcp --dport 443 -j MASQUERADE 2>/dev/null || true
-          iptables -t nat -D POSTROUTING -d 10.100.0.101 -p tcp --dport 4664 -j MASQUERADE 2>/dev/null || true
-        '';
+      extraStopCommands = ''
+        # Clean up SNAT rules
+        iptables -t nat -D POSTROUTING -d 10.100.0.101 -p tcp --dport 80 -j MASQUERADE 2>/dev/null || true
+        iptables -t nat -D POSTROUTING -d 10.100.0.101 -p tcp --dport 443 -j MASQUERADE 2>/dev/null || true
+      '';
 
       forwardPorts = [
         {
@@ -174,7 +172,7 @@ in
   networking.firewall = {
     enable = true;
     allowedUDPPorts = [ 61899 ];
-    allowedTCPPorts = [ 80 443 4664 ];
+    allowedTCPPorts = [ 80 443 ];
   };
 
 }
