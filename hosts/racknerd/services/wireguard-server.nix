@@ -167,7 +167,7 @@ in
   networking.firewall = {
     enable = true;
     allowedUDPPorts = [ 61899 ];
-    allowedTCPPorts = [ 80 443 ]; Disabling temporarily
+    allowedTCPPorts = [ 80 443 ];
   };
 
 }
