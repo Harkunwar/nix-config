@@ -3,7 +3,7 @@
 {
   sops = {
     secrets = {
-      "tokens/immich".sopsFile = ../../../secrets/rathole.yaml;
+      "tokens/node804".sopsFile = ../../../secrets/rathole.yaml;
       "tokens/vaultwarden".sopsFile = ../../../secrets/rathole.yaml;
     };
     templates = {
@@ -11,8 +11,8 @@
         [server]
         bind_addr = "0.0.0.0:2333"
 
-        [server.services.immich]
-        token = "${config.sops.placeholder."tokens/immich"}"
+        [server.services.node804]
+        token = "${config.sops.placeholder."tokens/node804"}"
         bind_addr = "127.0.0.1:6765"
 
         [server.services.vaultwarden]
