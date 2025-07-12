@@ -17,7 +17,7 @@
 
         [client.services.node804-https]
         token = "${config.sops.placeholder."tokens/node804-https"}"
-        local_addr = "127.0.0.1:443"
+        local_addr = "127.0.0.1:4664"
       '';
     };
   };
