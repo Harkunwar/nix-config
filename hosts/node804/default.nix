@@ -3,6 +3,7 @@ nixpkgs.lib.nixosSystem rec {
   pkgs = import nixpkgs { inherit system; };
   pkgs-unstable = import nixpkgs-unstable { inherit system; };
   system = "x86_64-linux";
+  specialArgs = { inherit pkgs-unstable; };
   modules = [
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
