@@ -11,13 +11,9 @@
         };
     };
 
-    # Override the pocket-id package to use the unstable version
-    nixpkgs.config.packageOverrides = pkgs: {
-        pocket-id = pkgs.unstable.pocket-id;
-    };
-
     services.pocket-id = {
         enable = true;
+        package = pkgs.unstable.pocket-id;
         settings = {
             PORT = 1441;
             TRUST_PROXY = true;
