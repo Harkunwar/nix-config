@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, home-manager ... }:
+{ inputs, nixpkgs, home-manager, ... }:
 nixpkgs.lib.nixosSystem rec {
   pkgs = import nixpkgs { inherit system; };
   system = "x86_64-linux";
