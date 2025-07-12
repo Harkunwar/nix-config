@@ -2,6 +2,7 @@
 nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
   pkgs = import nixpkgs { inherit system; };
+  specialArgs = { inherit inputs; };
   modules = [
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix

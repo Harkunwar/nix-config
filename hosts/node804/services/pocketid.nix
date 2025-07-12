@@ -1,13 +1,13 @@
-{ nixpkgs-unstable, config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
-    imports =
-        [ 
-        "${nixpkgs-unstable}/nixos/modules/services/security/pocket-id.nix"
-        ];
+    imports = [
+        "${inputs.nixpkgs-unstable}/nixos/modules/services/web-apps/pocket-id.nix"
+    ];
 
     disabledModules = [
-        "services/security/pocket-id.nix"
+        "services/web-apps/pocket-id.nix"
     ];
+
     sops = {
         secrets = {
             "MAXMIND_LICENSE_KEY".sopsFile = ../../../secrets/pocketid.yaml;
@@ -21,6 +21,7 @@
 
     services.pocket-id = {
         enable = true;
+        package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.pocket-id;
         settings = {
             APP_URL = "http://pocketid.lab.harkunwar.com";
             TRUST_PROXY = true;
