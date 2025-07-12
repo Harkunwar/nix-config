@@ -87,9 +87,25 @@ in
   };
 
 
-  networking.nat.enable = true;
-  networking.nat.externalInterface = "ens3";
-  networking.nat.internalInterfaces = [ "wg0" ];
+  networking = {
+    nat = {
+      enable = true;
+      externalInterface = "ens3";
+      internalInterfaces = [ "wg0" ];
+      forwardPorts = [
+        {
+          destination = "10.100.0.101:80";
+          proto = "tcp";
+          sourcePort = 80;
+        }
+        {
+          destination = "10.100.0.101:443";
+          proto = "tcp";
+          sourcePort = 443;
+        }
+      ];
+    };
+  };
 
   # WireGuard VPN Configuration
   networking.wireguard.interfaces = {
@@ -119,33 +135,11 @@ in
       # Add missing postSetup
       postSetup = ''
         ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ens3 -j MASQUERADE
-        
-        # Port forwarding rules - forward all HTTP/HTTPS traffic to node804 Caddy
-        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.100.0.101:80
-        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 10.100.0.101:443
-        
-        # Allow forwarding for these ports
-        ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -d 10.100.0.101 --dport 80 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -d 10.100.0.101 --dport 443 -j ACCEPT
-        
-        # Allow return traffic
-        ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -s 10.100.0.101 --sport 80 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -s 10.100.0.101 --sport 443 -j ACCEPT
       '';
 
       # This undoes the above command
       postShutdown = ''
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ens3 -j MASQUERADE
-        
-        # Remove port forwarding rules
-        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.100.0.101:80
-        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 443 -j DNAT --to-destination 10.100.0.101:443
-        
-        # Remove forward rules
-        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.101 --dport 80 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.101 --dport 443 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -s 10.100.0.101 --sport 80 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -s 10.100.0.101 --sport 443 -j ACCEPT
       '';
 
       # Path to the private key file managed by sops
