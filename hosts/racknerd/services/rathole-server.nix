@@ -15,8 +15,7 @@
   };
 
   services.rathole = {
-    enable = false;
-    package = pkgs.rathole;
+    enable = true;
     role = "server";
     credentialsFile = "${config.sops.templates."rathole-server.toml".path}";
     
@@ -25,7 +24,7 @@
         bind_addr = "0.0.0.0:2333";
         services = {
           immich = {
-            bind_addr = "0.0.0.0:4664";
+            bind_addr = "127.0.0.1:6765";
           };
         };
       };
