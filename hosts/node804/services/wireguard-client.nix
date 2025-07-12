@@ -33,7 +33,7 @@ in
             allowedIPs = [ "10.100.0.0/24" ];
             # allowedIPs = [ "0.0.0.0/0" ];
 
-            endpoint = "lab.harkunwar.com:61899";
+            endpoint = "104.168.82.76:61899";
 
             # Keep connection alive
             persistentKeepalive = 25;
