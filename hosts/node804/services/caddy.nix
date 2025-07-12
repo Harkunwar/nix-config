@@ -42,7 +42,7 @@
       };
 
       # Pocket ID service
-      "pocketid.lab.harkunwar.com" = {
+      "pocketid.lab.harkunwar.com:3000" = {
         extraConfig = ''
           tls {
             dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
