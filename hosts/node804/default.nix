@@ -1,9 +1,15 @@
 { inputs, nixpkgs, nixpkgs-unstable, home-manager, ... }:
 nixpkgs.lib.nixosSystem rec {
-  pkgs = import nixpkgs { inherit system; };
-  pkgs-unstable = import nixpkgs-unstable { inherit system; };
-  system = "x86_64-linux";
-  specialArgs = { inherit pkgs-unstable; };
+      specialArgs = {
+          # To use packages from nixpkgs-stable,
+          # we configure some parameters for it first
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+          };
+      };
   modules = [
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
