@@ -23,7 +23,7 @@
         enable = true;
         package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.pocket-id;
         settings = {
-            APP_URL = "http://pocketid.lab.harkunwar.com";
+            APP_URL = "https://pocketid.lab.harkunwar.com";
             TRUST_PROXY = true;
             PORT = 1441;
         };
