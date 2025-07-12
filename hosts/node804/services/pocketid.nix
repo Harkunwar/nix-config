@@ -15,8 +15,10 @@
         enable = true;
         package = pkgs-unstable.pocket-id;
         settings = {
-            PUBLIC_APP_URL = "http://192.168.2.101";
-            APP_URL = "http://192.168.2.101";
+            TRUST_PROXY = true;
+            PUBLIC_APP_URL = "http://pocketid.lab.harkunwar.com";
+            APP_URL = "http://pocketid.lab.harkunwar.com";
+            PORT = 1411;
         };
         environmentFile = "${config.sops.templates."pocketid-env".path}";
     };
