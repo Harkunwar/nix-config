@@ -1,7 +1,12 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 {
-    imports = [
-        "${pkgs.unstable}/nixos/modules/services/security/pocket-id.nix"
+    imports =
+        [ 
+        "${inputs.nixpkgs-unstable}/nixos/modules/services/security/pocket-id.nix"
+        ];
+
+    disabledModules = [
+        "services/security/pocket-id.nix"
     ];
     sops = {
         secrets = {
@@ -16,7 +21,6 @@
 
     services.pocket-id = {
         enable = true;
-        package = pkgs.unstable.pocket-id;
         settings = {
             APP_URL = "http://pocketid.lab.harkunwar.com";
             TRUST_PROXY = true;
