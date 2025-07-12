@@ -7,6 +7,8 @@
         templates = {
             "pocketid-env".content = ''
                 MAXMIND_LICENSE_KEY=${config.sops.placeholder."MAXMIND_LICENSE_KEY"}
+                PUBLIC_APP_URL=https://pocketid.lab.harkunwar.com
+                APP_URL=https://pocketid.lab.harkunwar.com
             '';
         };
     };
@@ -18,8 +20,6 @@
             PUBLIC_APP_URL = "https://pocketid.lab.harkunwar.com";
             APP_URL = "https://pocketid.lab.harkunwar.com";
             PORT = 1411;
-            INTERNAL_BACKEND_URL = "http://localhost:1412";
-            BACKEND_PORT = 1412;
 
         };
         environmentFile = "${config.sops.templates."pocketid-env".path}";
