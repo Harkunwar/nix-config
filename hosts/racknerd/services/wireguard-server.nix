@@ -103,6 +103,11 @@ in
           proto = "tcp";
           sourcePort = 443;
         }
+        {
+          destination = "10.100.0.101:4664";
+          proto = "tcp";
+          sourcePort = 4664;
+        }
       ];
     };
   };
