@@ -54,7 +54,7 @@
 
   # Environment variables for Cloudflare API
   systemd.services.caddy.serviceConfig.EnvironmentFile = [
-    "${config.sops.templates."cloudflare-env".path}"
+    "${config.sops.templates."cloudflare-caddy-env".path}"
   ];
 
   # Open firewall ports
