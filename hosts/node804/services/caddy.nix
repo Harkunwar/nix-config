@@ -4,23 +4,11 @@
     enable = true;
 
     virtualHosts = {
-      "immich.lab.harkunwar.com" = {
-        extraConfig = ''
-          # Disable automatic HTTPS for lab domain
-          auto_https off
-          
-          reverse_proxy 127.0.0.1:4664 {
-            header_up Host {upstream_hostport}
-            header_up X-Real-IP {remote_host}
-            header_up X-Forwarded-For {remote_host}
-            header_up X-Forwarded-Proto {scheme}
-          }
-        '';
-      };
-      
-      # # Alternative: Use HTTP explicitly
-      # "http://immich.lab.harkunwar.com" = {
+      # "immich.lab.harkunwar.com" = {
       #   extraConfig = ''
+      #     # Disable automatic HTTPS for lab domain
+      #     auto_https off
+          
       #     reverse_proxy 127.0.0.1:4664 {
       #       header_up Host {upstream_hostport}
       #       header_up X-Real-IP {remote_host}
@@ -29,6 +17,18 @@
       #     }
       #   '';
       # };
+      
+      # Alternative: Use HTTP explicitly
+      "http://immich.lab.harkunwar.com" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:4664 {
+            header_up Host {upstream_hostport}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+          }
+        '';
+      };
       
       # Template for future services
       # "nextcloud.lab.harkunwar.com" = {
