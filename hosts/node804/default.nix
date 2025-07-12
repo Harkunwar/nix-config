@@ -8,6 +8,7 @@ nixpkgs.lib.nixosSystem rec {
     ../common/core/sops.nix
     ../common/core/openssh.nix
     ./configuration.nix
+    ./services/wireguard-client.nix
     ./services/pocketid.nix
     ./services/caddy.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
