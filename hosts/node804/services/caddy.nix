@@ -79,7 +79,7 @@
 
   # Open firewall ports
   networking.firewall = {
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [ 80 443 4664 ];
   };
 
   # Enable automatic HTTPS with Let's Encrypt
