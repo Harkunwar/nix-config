@@ -1,4 +1,4 @@
-{ nixpkgs, config, pkgs, ... }:
+{ config, pkgs, ... }:
 {
     sops = {
         secrets = {
@@ -11,18 +11,15 @@
         };
     };
 
-    # Override the pocket-id package to use the unstable version
-    nixpkgs.config.packageOverrides = pkgs: {
-        pocket-id = pkgs.unstable.pocket-id;
-    };
-
     services.pocket-id = {
         enable = true;
+        package = pkgs.unstable.pocket-id;
         settings = {
-            PORT = 1441;
-            TRUST_PROXY = true;
             APP_URL = "http://pocketid.lab.harkunwar.com";
+            TRUST_PROXY = true;
+            PORT=1441
         };
         environmentFile = config.sops.templates."pocketid-env".path;
     };
+
 }
