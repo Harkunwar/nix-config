@@ -17,7 +17,7 @@
 
         [server.services.node804-https]
         token = "${config.sops.placeholder."tokens/node804-https"}"
-        bind_addr = "0.0.0.0:443"
+        bind_addr = "0.0.0.0:4664"
       '';
     };
   };
