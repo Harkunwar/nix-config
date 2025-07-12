@@ -17,6 +17,7 @@
             TRUST_PROXY = true;
             PUBLIC_APP_URL = "http://pocketid.lab.harkunwar.com";
             CADDY_PORT = 1411;
+            PUBLIC_UI_CONFIG_DISABLED = false;
             # CADDY_DISABLED=true;
         };
         # environmentFile = "${config.sops.templates."pocketid-env".path}";
