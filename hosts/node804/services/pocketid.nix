@@ -16,7 +16,7 @@
         package = pkgs.pocket-id;
         settings = {
             TRUST_PROXY = true;
-            APP_URL = "http://pocketid.lab.harkunwar.com";
+            PUBLIC_APP_URL = "http://pocketid.lab.harkunwar.com";
             PORT = 1411;
             # Database configuration - using SQLite for simplicity
             DATABASE_URL = "sqlite:///var/lib/pocket-id/pocket-id.db";
