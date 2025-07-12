@@ -11,15 +11,15 @@
         };
     };
 
-    services.pocket-id = {
-        enable = true;
-        package = pkgs.unstable.pocket-id;
-        settings = {
-            TRUST_PROXY = true;
-            APP_URL = "http://pocketid.lab.harkunwar.com";
-            PUBLIC_APP_URL = "https://pocketid.lab.harkunwar.com";
-            PORT = 1411;
-        };
-        environmentFile = "${config.sops.templates."pocketid-env".path}";
-    };
+    # services.pocket-id = {
+    #     enable = true;
+    #     package = pkgs.unstable.pocket-id;
+    #     settings = {
+    #         TRUST_PROXY = true;
+    #         APP_URL = "http://pocketid.lab.harkunwar.com";
+    #         PUBLIC_APP_URL = "https://pocketid.lab.harkunwar.com";
+    #         PORT = 1411;
+    #     };
+    #     environmentFile = "${config.sops.templates."pocketid-env".path}";
+    # };
 }
