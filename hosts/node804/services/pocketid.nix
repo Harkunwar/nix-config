@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+    imports = [
+            "${pkgs.unstable}/nixos/modules/services/security/pocket-id.nix"
+    ]
     sops = {
         secrets = {
             "MAXMIND_LICENSE_KEY".sopsFile = ../../../secrets/pocketid.yaml;
