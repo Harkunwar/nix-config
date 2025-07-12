@@ -8,8 +8,16 @@
     };
     templates = {
       "rathole-server.toml".content = ''
+        [server]
+        bind_addr = "0.0.0.0:2333"
+
         [server.services.immich]
-        token = "${config.sops.placeholder."tokens/immich"}";
+        token = "${config.sops.placeholder."tokens/immich"}"
+        bind_addr = "127.0.0.1:6765"
+
+        [server.services.vaultwarden]
+        token = "${config.sops.placeholder."tokens/vaultwarden"}"
+        bind_addr = "127.0.0.1:8222"
       '';
     };
   };
@@ -18,17 +26,6 @@
     enable = true;
     role = "server";
     credentialsFile = "${config.sops.templates."rathole-server.toml".path}";
-    
-    settings = {
-      server = {
-        bind_addr = "0.0.0.0:2333";
-        services = {
-          immich = {
-            bind_addr = "127.0.0.1:6765";
-          };
-        };
-      };
-    };
   };
 
   # Open firewall for rathole
