@@ -10,6 +10,17 @@ nixpkgs.lib.nixosSystem rec {
     ./services/caddy.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
     ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
+    # Make unstable packages available
+    ({ config, pkgs, ... }: {
+      nixpkgs.overlays = [
+        (final: prev: {
+          unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        })
+      ];
+    })
   ];
 }
 

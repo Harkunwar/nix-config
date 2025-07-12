@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, ... }:
 {
     sops = {
         secrets = {
@@ -13,6 +13,7 @@
 
     services.pocket-id = {
         enable = true;
+        package = pkgs.unstable.pocket-id;
         settings = {
             TRUST_PROXY = true;
             PUBLIC_APP_URL = "http://pocketid.lab.harkunwar.com";
