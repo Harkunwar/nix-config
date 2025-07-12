@@ -22,6 +22,11 @@
     # Global configuration for Cloudflare DNS challenge
     globalConfig = ''
         acme_dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
+        {
+            log {
+                level DEBUG
+            }
+        }
     '';
 
     virtualHosts = {
