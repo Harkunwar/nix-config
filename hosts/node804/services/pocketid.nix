@@ -7,8 +7,6 @@
         templates = {
             "pocketid-env".content = ''
                 MAXMIND_LICENSE_KEY=${config.sops.placeholder."MAXMIND_LICENSE_KEY"}
-                PUBLIC_APP_URL=https://pocketid.lab.harkunwar.com
-                APP_URL=https://pocketid.lab.harkunwar.com
             '';
         };
     };
@@ -17,13 +15,8 @@
         enable = true;
         package = pkgs.pocket-id;
         settings = {
-            TRUST_PROXY = true;
-            PUBLIC_APP_URL = "https://pocketid.lab.harkunwar.com";
-            APP_URL = "https://pocketid.lab.harkunwar.com";
-            PORT = 1411;
-            PUID = 1111;
-            GUID = 1111;
-
+            PUBLIC_APP_URL = "http://192.168.2.101";
+            APP_URL = "http://192.168.2.101";
         };
         environmentFile = "${config.sops.templates."pocketid-env".path}";
     };
