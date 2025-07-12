@@ -18,8 +18,8 @@ in
     enable = true;
     interfaces = {
       wg0 = {
-        # IP address assigned to this client
-        ips = [ "10.100.0.101/24" ];
+        # IP address assigned to this client (using /32 like other clients)
+        ips = [ "10.100.0.101/32" ];
 
         # Path to the private key file managed by sops
         privateKeyFile = config.sops.secrets."wireguard/wg0/clients/node804/private".path;
@@ -29,11 +29,9 @@ in
             # RackNerd server public key
             publicKey = wg0ServerPublicKey;
 
-            # Route all traffic through VPN for full connectivity
-            allowedIPs = [ "10.100.0.0/24" ];
+            # Route all traffic through VPN (like iPhone/MacBook)
+            allowedIPs = [ "10.0.0.1/24" ];
 
-            # Server endpoint - replace with actual RackNerd server IP
-            # You'll need to replace this with your actual server IP
             endpoint = "lab.harkunwar.com:61899";
 
             # Keep connection alive
@@ -43,4 +41,7 @@ in
       };
     };
   };
+
+  # Set DNS to use the same as other clients
+  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
 }
