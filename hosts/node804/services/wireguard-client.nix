@@ -30,7 +30,7 @@ in
             publicKey = wg0ServerPublicKey;
 
             # Route all traffic through VPN (like iPhone/MacBook)
-            allowedIPs = [ "10.100.0.0/24" ];
+            allowedIPs = [ "10.0.0.1/24" ];
 
             endpoint = "lab.harkunwar.com:61899";
 
@@ -41,4 +41,7 @@ in
       };
     };
   };
+
+  # Set DNS to use the same as other clients
+  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
 }
