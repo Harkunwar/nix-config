@@ -1,7 +1,29 @@
+/*
+  WireGuard VPN Server Configuration for RackNerd
+
+  This configuration sets up a WireGuard VPN server on a RackNerd VPS.
+
+  How to add a new client:
+  1. Generate a new key pair for the client:
+      PrivateKey=$(wg genkey)
+      PublicKey=$(echo $PrivateKey | wg pubkey)
+  2. Add the public key to the `peers` section in this file.
+  3. Add the sops secret in secrets/wireguard.yaml:
+      wireguard:
+        wg0:
+          clients:
+            <client-name>:
+              private: <private-key>
+
+  4. Create a new sops template for the client configuration in this file.
+  5. qrencode the client configuration file locate at:
+      qrencode -t ansiutf8 < /run/secrets/rendered/wireguard-<client-name>.conf
+*/
 { config, pkgs, ... }:
 
 let
   wg0ServerPublicKey = "/GmQTUpinK8gpnqJqI51CpNjErXdyszO8UnkDSiUzyg=";
+  node804PublicKey = "xWfuwTk4sqarAFE/MG/Zw5aoJr2CCvZbroMfyu6plWY=";
   iphone12ProPublicKey = "+379Fqfb7hvrAxv9FAKVPHBmVzRppWmCxPaa6FMzYFw=";
   macbookPro14PublicKey = "C9iwII6H0BpSXIkJmrnE0twOvcxThoOLn2qSU6BVxkY=";
 in
@@ -80,6 +102,10 @@ in
 
       # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
       peers = [
+        {
+          publicKey = node804PublicKey;
+          allowedIPs = [ "10.100.0.101/32" ]
+        }
         { 
           publicKey = iphone12ProPublicKey;
           allowedIPs = [ "10.100.0.2/32" ];
