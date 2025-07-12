@@ -11,18 +11,18 @@ in
         owner = "systemd-network";
         group = "systemd-network";
         mode = "0400";
-        sopsFile = ../../../secrets/racknerd.yaml;
+        sopsFile = ../../../secrets/wireguard.yaml;
     };
     "wireguard/wg0/clients/iphone12pro/private" = {
         mode = "0444";
-        sopsFile = ../../../secrets/racknerd.yaml;
+        sopsFile = ../../../secrets/wireguard.yaml;
     };
     "wireguard/wg0/clients/macbookpro14/private" = {
         mode = "0444";
-        sopsFile = ../../../secrets/racknerd.yaml;
+        sopsFile = ../../../secrets/wireguard.yaml;
     };
     "ip" = {
-        sopsFile = ../../../secrets/racknerd.yaml;
+        sopsFile = ../../../secrets/wireguard.yaml;
     };
   };
 
