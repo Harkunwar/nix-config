@@ -48,7 +48,7 @@
             dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
           }
           
-          reverse_proxy 127.0.0.1:1411
+          reverse_proxy 127.0.0.1:80
         '';
       };
       

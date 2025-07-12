@@ -13,21 +13,11 @@
 
     services.pocket-id = {
         enable = true;
-        package = pkgs.pocket-id;
         settings = {
             TRUST_PROXY = true;
             PUBLIC_APP_URL = "http://pocketid.lab.harkunwar.com";
-            PORT = 1411;
-            # Database configuration - using SQLite for simplicity
-            DATABASE_URL = "sqlite:///var/lib/pocket-id/pocket-id.db";
-            # Allow setup mode for initial configuration
-            SETUP_MODE = true;
+            PORT = 80;
         };
         # environmentFile = "${config.sops.templates."pocketid-env".path}";
     };
-
-    # Ensure the data directory exists with proper permissions
-    systemd.tmpfiles.rules = [
-        "d /var/lib/pocket-id 0755 pocket-id pocket-id -"
-    ];
 }
