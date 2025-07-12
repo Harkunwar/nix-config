@@ -18,8 +18,8 @@
 
     services.pocket-id = {
         enable = true;
-        port = 1441;
         settings = {
+            PORT = 1441;
             TRUST_PROXY = true;
             APP_URL = "http://pocketid.lab.harkunwar.com";
         };
