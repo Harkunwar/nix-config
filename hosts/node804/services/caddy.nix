@@ -1,5 +1,16 @@
 { config, pkgs, ... }:
 {
+  sops = {
+    secrets = {
+      "EDIT_ALL_ZONE_API_KEY".sopsFile = ../../../secrets/cloudflare.yaml;
+    };
+    templates = {
+      "cloudflare-caddy-env".content = ''
+        CLOUDFLARE_EDIT_ALL_ZONE_API_KEY=${config.sops.placeholder."EDIT_ALL_ZONE_API_KEY"}
+      '';
+    };
+  };
+
   services.caddy = {
     enable = true;
 
@@ -8,24 +19,21 @@
       hash = "sha256-xMxNAg08LDVifhsryGXV22LXqgRDdfjmsU0NfbUJgMg=";
     };
 
+    # Global configuration for Cloudflare DNS challenge
+    globalConfig = ''
+      {
+        acme_dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
+      }
+    '';
+
     virtualHosts = {
-      # "immich.lab.harkunwar.com" = {
-      #   extraConfig = ''
-      #     # Disable automatic HTTPS for lab domain
-      #     auto_https off
-          
-      #     reverse_proxy 127.0.0.1:4664 {
-      #       header_up Host {upstream_hostport}
-      #       header_up X-Real-IP {remote_host}
-      #       header_up X-Forwarded-For {remote_host}
-      #       header_up X-Forwarded-Proto {scheme}
-      #     }
-      #   '';
-      # };
-      
-      # Alternative: Use HTTP explicitly
-      "http://immich.lab.harkunwar.com" = {
+      # HTTPS with Cloudflare DNS challenge
+      "immich.lab.harkunwar.com" = {
         extraConfig = ''
+          tls {
+            dns cloudflare {env.CLOUDFLARE_EDIT_ALL_ZONE_API_KEY}
+          }
+          
           reverse_proxy 127.0.0.1:4664 {
             header_up Host {upstream_hostport}
             header_up X-Real-IP {remote_host}
@@ -44,14 +52,19 @@
     };
   };
 
+  # Environment variables for Cloudflare API
+  systemd.services.caddy.serviceConfig.EnvironmentFile = [
+    "${config.sops.templates."cloudflare-env".path}"
+  ]
+
   # Open firewall ports
   networking.firewall = {
     allowedTCPPorts = [ 80 443 ];
   };
 
   # Enable automatic HTTPS with Let's Encrypt
-  # security.acme = {
-  #   acceptTerms = true;
-  #   defaults.email = "your-email@example.com";
-  # };
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "10580591+Harkunwar@users.noreply.github.com";
+  };
 }
