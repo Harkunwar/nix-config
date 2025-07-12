@@ -23,7 +23,7 @@
             # Allow setup mode for initial configuration
             SETUP_MODE = true;
         };
-        environmentFile = "${config.sops.templates."pocketid-env".path}";
+        # environmentFile = "${config.sops.templates."pocketid-env".path}";
     };
 
     # Ensure the data directory exists with proper permissions
