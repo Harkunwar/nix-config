@@ -41,7 +41,4 @@ in
       };
     };
   };
-
-  # Set DNS to use the same as other clients
-  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
 }

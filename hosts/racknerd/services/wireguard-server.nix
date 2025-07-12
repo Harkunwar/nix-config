@@ -120,17 +120,13 @@ in
       postSetup = ''
         ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ens3 -j MASQUERADE
         
-        # Port forwarding rules - forward all HTTP/HTTPS traffic to node804
-        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.100.0.101:80
-        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 10.100.0.101:443
+        # Port forwarding rules - forward HTTP/HTTPS to node804
+        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 80 -j DNAT --to-destination 10.100.0.101:80
+        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 443 -j DNAT --to-destination 10.100.0.101:443
         
-        # Allow forwarding for these ports from any source
+        # Allow forwarding for these ports
         ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -d 10.100.0.101 --dport 80 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -d 10.100.0.101 --dport 443 -j ACCEPT
-        
-        # Allow return traffic
-        ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -s 10.100.0.101 --sport 80 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -A FORWARD -p tcp -s 10.100.0.101 --sport 443 -j ACCEPT
       '';
 
       # This undoes the above command
@@ -138,14 +134,12 @@ in
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o ens3 -j MASQUERADE
         
         # Remove port forwarding rules
-        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.100.0.101:80
-        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -p tcp --dport 443 -j DNAT --to-destination 10.100.0.101:443
+        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ens3 -p tcp --dport 80 -j DNAT --to-destination 10.100.0.101:80
+        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ens3 -p tcp --dport 443 -j DNAT --to-destination 10.100.0.101:443
         
         # Remove forward rules
         ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.101 --dport 80 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -s 10.100.0.101 --sport 80 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -d 10.100.0.101 --dport 443 -j ACCEPT
-        ${pkgs.iptables}/bin/iptables -D FORWARD -p tcp -s 10.100.0.101 --sport 443 -j ACCEPT
       '';
 
       # Path to the private key file managed by sops
