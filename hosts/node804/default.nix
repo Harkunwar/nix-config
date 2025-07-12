@@ -2,12 +2,6 @@
 nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
   pkgs = import nixpkgs { inherit system; };
-  pkgs-unstable = import nixpkgs-unstable { inherit system; };
-  nixpkgs.overlays = [
-    (self: super: {
-      pocket-id = pkgs-unstable.pocket-id;
-    })
-  ];
   modules = [
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
