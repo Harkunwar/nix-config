@@ -30,8 +30,8 @@ in
             publicKey = wg0ServerPublicKey;
 
             # Route all traffic through VPN (like iPhone/MacBook)
-            allowedIPs = [ "10.100.0.0/24" ];
-            # allowedIPs = [ "0.0.0.0/0" ];
+            # allowedIPs = [ "10.100.0.0/24" ];
+            allowedIPs = [ "0.0.0.0/0" ];
 
             endpoint = "104.168.82.76:61899";
 
@@ -39,6 +39,14 @@ in
             persistentKeepalive = 25;
           }
         ];
+            # Prevent this interface from becoming the default route
+        postSetup = ''
+          # Remove the default route that might be added
+          ${pkgs.iproute2}/bin/ip route del default dev wg0 2>/dev/null || true
+          
+          # Add specific routes for traffic you want to go through the VPN
+          ${pkgs.iproute2}/bin/ip route add 10.100.0.0/24 dev wg0
+        '';
       };
     };
   };
