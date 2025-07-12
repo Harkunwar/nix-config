@@ -15,6 +15,7 @@
         enable = true;
         settings = {
             TRUST_PROXY = true;
+            PUBLIC_APP_URL = "https://pocketid.lab.harkunwar.com";
             APP_URL = "https://pocketid.lab.harkunwar.com";
             PORT = 1411;
         };
