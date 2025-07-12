@@ -1,11 +1,11 @@
 { config, pkgs, inputs, ... }:
 {
     imports = [
-        "${inputs.nixpkgs-unstable}/nixos/modules/services/web-apps/pocket-id.nix"
+        "${inputs.nixpkgs-unstable}/nixos/modules/services/security/pocket-id.nix"
     ];
 
     disabledModules = [
-        "services/web-apps/pocket-id.nix"
+        "services/security/pocket-id.nix"
     ];
 
     sops = {
