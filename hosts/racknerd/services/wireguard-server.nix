@@ -92,6 +92,13 @@ in
       enable = true;
       externalInterface = "ens3";
       internalInterfaces = [ "wg0" ];
+
+        extraCommands = ''
+          # Allow hairpin NAT for local connections
+          iptables -t nat -A OUTPUT -d 104.168.82.76 -p tcp --dport 4664 -j DNAT --to-destination 10.100.0.101:4664
+          iptables -t nat -A POSTROUTING -s 127.0.0.0/8 -d 10.100.0.101 -p tcp --dport 4664 -j MASQUERADE
+        '';
+
       forwardPorts = [
         {
           destination = "10.100.0.101:80";
