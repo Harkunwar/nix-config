@@ -1,7 +1,8 @@
 { inputs, nixpkgs, ... }:
 nixpkgs.lib.nixosSystem rec {
-  pkgs = import nixpkgs { inherit system; };
   system = "x86_64-linux";
+  pkgs = import nixpkgs { inherit system; };
+  specialArgs = { inherit inputs; };
   modules = [
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
@@ -12,6 +13,16 @@ nixpkgs.lib.nixosSystem rec {
     ./services/caddy.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
     ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
+     ({ config, pkgs, ... }: {
+      nixpkgs.overlays = [
+        (final: prev: {
+          unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        })
+      ];
+    })
   ];
 }
 
