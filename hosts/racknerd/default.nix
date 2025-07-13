@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, ... }:
+{ inputs, nixpkgs, nixpkgs-unstable, ... }:
 nixpkgs.lib.nixosSystem rec {
   system = "x86_64-linux";
   pkgs = import nixpkgs { inherit system; };
