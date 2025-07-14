@@ -52,39 +52,19 @@
 
 
   users.users.harkunwar = {
-    isNormalUser = true;
-    description = "Harkunwar";
     extraGroups = [
-      "wheel" # Enable 'sudo' for the user
-      "storage-admin" # Joining NAS groups
+      "storage-admin"
       "storage-users"
       "timemachine-users"
       "networkmanager"
       "audio"
       "video"
-      "docker" # If you use Docker
-    ];
-
-    # Set up SSH key for the user (same as your initrd key)
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
+      "docker"
     ];
 
     # Set a password hash (see below for how to generate)
     hashedPassword = "$6$VUX42OyBWi3l7vWt$M7X2P3BvSojRMvccpK.Ye3Lw7zPTtLbtbmu9O8sVTwklQJiSe/RSK2VMXvOgt1b6jSYjrjl9g3UuHdFeFR2h70"; # Replace with actual hash
   };
-
-  security.sudo.extraRules = [
-    {
-      users = [ "harkunwar" ];
-      commands = [
-        {
-          command = "ALL";
-          options = [ "SETENV" "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
 
   # Enable Samba services with group-based access
   services.samba = {
@@ -255,10 +235,6 @@
     # "d /mnt/molasses/media 0775 root media-users -"
     # "d /mnt/molasses/backup 0770 root backup-operators -"
   ];
-
-
-  # Enable sudo for wheel group
-  security.sudo.wheelNeedsPassword = true; # Set to false if you need passwordless sudo
 
   networking = {
     hostName = "node804"; # Define your hostname

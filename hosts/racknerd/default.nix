@@ -7,6 +7,7 @@ nixpkgs.lib.nixosSystem rec {
     inputs.sops-nix.nixosModules.sops
     ../common/core/sops.nix
     ../common/core/openssh.nix
+    ../../users/harkunwar.nix
     ./configuration.nix
     ./services/wireguard-server.nix
     ./services/pocketid.nix

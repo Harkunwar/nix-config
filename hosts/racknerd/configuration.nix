@@ -11,6 +11,9 @@
       ./hardware-configuration.nix
     ];
 
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
@@ -25,33 +28,10 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  users.users.nixos.isNormalUser = true;
   users.users.harkunwar = {
-    isNormalUser = true;
-    description = "Harkunwar";
-    extraGroups = [ "wheel" ];
     hashedPassword = "$6$..PC1mscayxni18U$kkhh5U1UvTVbiA1rz11JEBQ3XiYsROpmjTQlwDDZyH/8ljhJnhFrJeAivX0s8lW5qmuR./RTBFeh9.vUQPLzr/";
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
-    ];
   };
 
-  security.sudo.extraRules = [
-    {
-      users = [ "harkunwar" ];
-      commands = [
-        {
-          command = "ALL";
-          options = [ "SETENV" "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-
-  # security.sudo = {
-  #   enable = true; # Enable the sudo service.
-  #   wheelNeedsPassword = false; # Allow users in the wheel group to run sudo without a password.
-  # };
   environment.systemPackages = with pkgs; [ git vim ];
 
   # Set your time zone.
