@@ -1,0 +1,32 @@
+keys:
+  - &users:
+    - &admin_age age1rjzjwv3puz9uhej28rphkvc3vus2lufe8t86y2k37ux2vgc34gtqwfuutx
+  - &hosts:
+    - &racknerd_age age1zwlgtev8hw9dtjkx2sqttvzd0nsl9x68y6sq6q5f3nzvc0smlejs8n5jmn
+    - &node804_age age1ld6r9rupl9yp8jcctrcxkqha2m7emframy5jxf2z7yd83eklje2qen5acq
+
+creation_rules:
+  - path_regex: secrets/wireguard.yaml$
+    key_groups:
+    - age:
+      - *admin_age
+      - *racknerd_age
+      - *node804_age
+  - path_regex: secrets/rathole.yaml$
+    key_groups:
+    - age:
+      - *admin_age
+      - *racknerd_age
+      - *node804_age
+  - path_regex: secrets/cloudflare.yaml$
+    key_groups:
+    - age:
+      - *admin_age
+      - *node804_age
+      - *racknerd_age
+  - path_regex: secrets/pocketid.yaml$
+    key_groups:
+    - age:
+      - *admin_age
+      - *node804_age
+      - *racknerd_age

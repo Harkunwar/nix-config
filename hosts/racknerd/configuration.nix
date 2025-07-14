@@ -6,20 +6,20 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
 
-  services.openssh.enable = true;
-  services.openssh.openFirewall = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # boot.loader.efif.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
@@ -28,21 +28,10 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  users.users.nixos.isNormalUser = true;
   users.users.harkunwar = {
-    isNormalUser = true;
-    description = "Harkunwar";
-    extraGroups = [ "wheel" ];
     hashedPassword = "$6$..PC1mscayxni18U$kkhh5U1UvTVbiA1rz11JEBQ3XiYsROpmjTQlwDDZyH/8ljhJnhFrJeAivX0s8lW5qmuR./RTBFeh9.vUQPLzr/";
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
-    ]; 
   };
 
-  # security.sudo = {
-  #   enable = true; # Enable the sudo service.
-  #   wheelNeedsPassword = false; # Allow users in the wheel group to run sudo without a password.
-  # };
   environment.systemPackages = with pkgs; [ git vim ];
 
   # Set your time zone.
@@ -64,7 +53,7 @@
   # services.xserver.enable = true;
 
 
-  
+
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -111,15 +100,6 @@
   # };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

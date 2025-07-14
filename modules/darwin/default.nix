@@ -35,6 +35,11 @@
     # nodePackages.typescript-language-server
     # nodePackages.vscode-langservers-extracted # HTML, CSS, JSON
     taplo # TOML
+
+    # Secrets Management
+    sops
+    age
+    ssh-to-age
   ];
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];

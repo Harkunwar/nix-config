@@ -9,10 +9,12 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./services/immich.nix
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  environment.systemPackages = with pkgs; [ git vim ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -21,15 +23,6 @@
 
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
-
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PasswordAuthentication = true;
-      PermitRootLogin = "no";
-    };
-  };
 
   users.groups = {
     # Storage access groups
@@ -59,22 +52,14 @@
 
 
   users.users.harkunwar = {
-    isNormalUser = true;
-    description = "Harkunwar";
     extraGroups = [
-      "wheel" # Enable 'sudo' for the user
-      "storage-admin" # Joining NAS groups
+      "storage-admin"
       "storage-users"
       "timemachine-users"
       "networkmanager"
       "audio"
       "video"
-      "docker" # If you use Docker
-    ];
-
-    # Set up SSH key for the user (same as your initrd key)
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1H9FyV6MmS/rxDMvUS5Ot/vYpXAsVxQaBEME0cgmI0 10580591+Harkunwar@users.noreply.github.com"
+      "docker"
     ];
 
     # Set a password hash (see below for how to generate)
@@ -193,16 +178,6 @@
     };
   };
 
-  services.immich = {
-    enable = true;
-    openFirewall = true;
-    port = 4664;
-    accelerationDevices = null; # Set to null to enable all devices
-    mediaLocation = "/mnt/molasses/private-media";
-    group = "immich";
-    host = "0.0.0.0";
-  };
-
   # Avahi configuration (same as before)
   services.avahi = {
     enable = true;
@@ -260,10 +235,6 @@
     # "d /mnt/molasses/media 0775 root media-users -"
     # "d /mnt/molasses/backup 0770 root backup-operators -"
   ];
-
-
-  # Enable sudo for wheel group
-  security.sudo.wheelNeedsPassword = true; # Set to false if you need passwordless sudo
 
   networking = {
     hostName = "node804"; # Define your hostname
@@ -404,14 +375,6 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
