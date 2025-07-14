@@ -14,13 +14,17 @@
     darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Partitioning and disk management tool
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     # Provides a way to manage secrets
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ nixpkgs, home-manager, sops-nix, darwin, nixpkgs-unstable, self, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, sops-nix, darwin, nixpkgs-unstable, disko, self, ... }: {
 
     nixosConfigurations = {
       # This is the NixOS configuration for the Node804 server
@@ -33,6 +37,12 @@
       # It imports the configuration from the hosts/racknerd directory
       racknerd = import ./hosts/racknerd {
         inherit inputs nixpkgs nixpkgs-unstable;
+      };
+
+      # This is the NixOS configuration for the DediRock Krypton Tank
+      # It imports the configuration from the hosts/dedirock-krypton-tank directory
+      dedirock-krypton-tank = import ./hosts/dedirock-krypton-tank {
+        inherit inputs nixpkgs nixpkgs-unstable disko;
       };
     };
 
