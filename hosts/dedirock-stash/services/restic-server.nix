@@ -1,6 +1,28 @@
 { pkgs, config, ... }:
 {
 
+  sops = {
+    secrets = {
+      "node804-restic-htpasswd" = {
+        sopsFile = ../../../secrets/dedirock-stash/node804.yaml;
+        mode = "0444";
+      };
+
+      "racknerd-restic-htpasswd" = {
+        sopsFile = ../../../secrets/dedirock-stash/racknerd.yaml;
+        mode = "0444";
+      };
+    };
+
+    templates = {
+      ".htpasswd-restic-server".content = ''
+        node804:${config.sops.placeholder."node804-restic-htpasswd"}
+        racknerd:${config.sops.placeholder."racknerd-restic-htpasswd"}
+      '';
+    };
+  };
+
+
   #   users.users.restic = {
   #     isNormalUser = true;
   #   };
@@ -18,7 +40,14 @@
       enable = true;
       prometheus = true;
       dataDir = /mnt/backup/restic;
-      listenAddress = "8198";
+      listenAddress = "7782";
+      htpasswd-file = config.sops.templates.".htpasswd-restic-server".path;
     };
+  };
+
+  # Open port for Restic server
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 7782 ];
   };
 }
