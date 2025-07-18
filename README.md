@@ -69,7 +69,7 @@ nixos-rebuild dry-build --flake .#node804
 For a fresh installation on a remote system:
 
 ```bash
-# Install NixOS on DediRock Krypton Tank
+# Install NixOS on DediRock Stash
 nix run github:nix-community/nixos-anywhere -- --flake .#dedirock-krypton-tank --target-host root@dedirock-krypton-tank.clivin.com
 
 # Install NixOS on Node804
