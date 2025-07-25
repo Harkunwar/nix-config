@@ -15,10 +15,14 @@
     };
 
     templates = {
-      ".htpasswd-restic-server".content = ''
-        node804:${config.sops.placeholder."node804-restic-htpasswd"}
-        racknerd:${config.sops.placeholder."racknerd-restic-htpasswd"}
-      '';
+      ".htpasswd-restic-server" = {
+        content = ''
+          node804:${config.sops.placeholder."node804-restic-htpasswd"}
+          racknerd:${config.sops.placeholder."racknerd-restic-htpasswd"}
+        '';
+        owner = "restic";
+        group = "restic";
+      };
     };
   };
 
@@ -39,7 +43,7 @@
     server = {
       enable = true;
       prometheus = true;
-      dataDir = /mnt/backup/restic;
+      dataDir = "/mnt/backup/restic";
       listenAddress = "7782";
       htpasswd-file = config.sops.templates.".htpasswd-restic-server".path;
     };

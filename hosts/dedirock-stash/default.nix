@@ -9,6 +9,8 @@ nixpkgs.lib.nixosSystem rec {
     ../common/core/sops.nix
     ../common/core/openssh.nix
     ../common/core/flakes.nix
+    ./services/restic-server.nix
+    ./services/caddy.nix
     ../../users/harkunwar.nix
     ./configuration.nix
     ./hardware-configuration.nix
