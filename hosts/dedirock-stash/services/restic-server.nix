@@ -48,10 +48,4 @@
       htpasswd-file = config.sops.templates.".htpasswd-restic-server".path;
     };
   };
-
-  # Open port for Restic server
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 7782 ];
-  };
 }
