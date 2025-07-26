@@ -11,7 +11,7 @@ A comprehensive Nix configuration for managing NixOS servers and macOS systems u
 │   ├── common/             # Shared configurations
 │   │   ├── core/           # Core system configurations
 │   │   └── optional/       # Optional modules
-│   ├── dedirock-krypton-tank/  # DediRock server config
+│   ├── gotham/  # DediRock server config
 │   ├── macbook-pro-14/     # macOS configuration
 │   ├── node804/            # Node804 server config
 │   └── racknerd/           # Racknerd server config
@@ -70,7 +70,7 @@ For a fresh installation on a remote system:
 
 ```bash
 # Install NixOS on DediRock Stash
-nix run github:nix-community/nixos-anywhere -- --flake .#dedirock-krypton-tank --target-host root@dedirock-krypton-tank.clivin.com
+nix run github:nix-community/nixos-anywhere -- --flake .#gotham --target-host root@gotham.clivin.com
 
 # Install NixOS on Node804
 nix run github:nix-community/nixos-anywhere -- --flake .#node804 --target-host root@node804.example.com
@@ -85,7 +85,7 @@ For updating an already configured system:
 
 ```bash
 # Build and deploy to DediRock Krypton Tank (as user)
-nix run github:nix-community/nixos-anywhere -- --flake .#dedirock-krypton-tank --target-host harkunwar@dedirock-krypton-tank.clivin.com
+nix run github:nix-community/nixos-anywhere -- --flake .#gotham --target-host harkunwar@gotham.clivin.com
 
 # Build and deploy to Node804 (as user)
 nix run github:nix-community/nixos-anywhere -- --flake .#node804 --target-host harkunwar@node804.example.com

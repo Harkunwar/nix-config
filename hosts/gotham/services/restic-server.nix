@@ -4,12 +4,12 @@
   sops = {
     secrets = {
       "node804-restic-htpasswd" = {
-        sopsFile = ../../../secrets/dedirock-stash/node804.yaml;
+        sopsFile = ../../../secrets/gotham/node804.yaml;
         mode = "0444";
       };
 
       "racknerd-restic-htpasswd" = {
-        sopsFile = ../../../secrets/dedirock-stash/racknerd.yaml;
+        sopsFile = ../../../secrets/gotham/racknerd.yaml;
         mode = "0444";
       };
     };
