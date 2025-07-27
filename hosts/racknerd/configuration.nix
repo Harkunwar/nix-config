@@ -32,7 +32,7 @@
   environment.systemPackages = with pkgs; [ git vim ];
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "America/Seattle";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
