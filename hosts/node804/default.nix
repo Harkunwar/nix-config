@@ -11,7 +11,7 @@ nixpkgs.lib.nixosSystem rec {
     ../../users/harkunwar.nix
     ./configuration.nix
     ./services/wireguard-client.nix
-    # ./services/restic-client.nix
+    ./services/restic-client.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
     ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
     # Make unstable packages available
