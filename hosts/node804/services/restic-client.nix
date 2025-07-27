@@ -6,21 +6,21 @@
         sopsFile = ../../../secrets/gotham/node804.yaml;
         mode = "0444";
         owner = "restic";
-        group = "restic";
+        group = "users";
       };
 
       "backups/immich/password" = {
         sopsFile = ../../../secrets/node804/restic.yaml;
-        mode = "0444";
+        mode = "0400";
         owner = "restic";
-        group = "restic";
+        group = "users";
       };
 
       "backups/immich/repository" = {
         sopsFile = ../../../secrets/node804/restic.yaml;
-        mode = "0444";
+        mode = "0400";
         owner = "restic";
-        group = "restic";
+        group = "users";
       };
     };
 
@@ -31,10 +31,10 @@
           RESTIC_REST_USERNAME=node804
         '';
         owner = "restic";
-        group = "restic";
-        mode = "0444";
+        group = "users";
+        mode = "0400";
       };
-    }
+    };
   };
 
   services.restic.backups = {
@@ -78,6 +78,7 @@
 
   users.users.restic = {
     isNormalUser = true;
+    group = "users";
   };
 
   security.wrappers.restic = {
