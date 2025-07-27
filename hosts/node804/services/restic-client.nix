@@ -2,8 +2,8 @@
 {
   sops = {
     secrets = {
-      "node804-restic-htpasswd" = {
-        sopsFile = ../../../secrets/gotham/node804.yaml;
+      "repository/gotham/password" = {
+        sopsFile = ../../../secrets/node804/restic.yaml;
         mode = "0444";
         owner = "restic";
         group = "users";
@@ -27,7 +27,7 @@
     templates = {
       "gotham-environment" = {
         content = ''
-          RESTIC_PASSWORD_FILE="${config.sops.secrets."node804-restic-htpasswd".path}"
+          RESTIC_PASSWORD_FIlE="${config.sops.secrets."repository/gotham/password".path}"
           RESTIC_REST_USERNAME=node804
         '';
         owner = "restic";
@@ -46,7 +46,8 @@
 
       initialize = true;
 
-      repositoryFile = config.sops.secrets."backups/immich/repository".path;
+      repository = "rest:https://node804:@restic.gotham.checks.top/immich";
+      # repositoryFile = config.sops.secrets."backups/immich/repository".path;
       passwordFile = config.sops.secrets."backups/immich/password".path;
 
       # Environment for HTTP auth
