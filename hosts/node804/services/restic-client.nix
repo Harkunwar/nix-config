@@ -2,124 +2,89 @@
 {
   sops = {
     secrets = {
-      "restic-repository-password" = {
-        sopsFile = ../../../secrets/node804-restic.yaml;
-        mode = "0400";
-        owner = "root";
-        group = "root";
+      "node804-restic-htpasswd" = {
+        sopsFile = ../../../secrets/gotham/node804.yaml;
+        mode = "0444";
+        owner = "restic";
+        group = "restic";
       };
 
-      "restic-http-auth" = {
-        sopsFile = ../../../secrets/gotham/node804.yaml;
-        mode = "0400";
-        owner = "root";
-        group = "root";
+      "backups/immich/password" = {
+        sopsFile = ../../../secrets/node804/restic.yaml;
+        mode = "0444";
+        owner = "restic";
+        group = "restic";
+      };
+
+      "backups/immich/repository" = {
+        sopsFile = ../../../secrets/node804/restic.yaml;
+        mode = "0444";
+        owner = "restic";
+        group = "restic";
       };
     };
+
+    templates = {
+      "gotham-environment" = {
+        content = ''
+          RESTIC_PASSWORD_FILE="${config.sops.secrets."node804-restic-htpasswd".path}"
+          RESTIC_REST_USERNAME=node804
+        '';
+        owner = "restic";
+        group = "restic";
+        mode = "0444";
+      };
+    }
   };
 
   services.restic.backups = {
-    daily = {
-      repository = "rest:http://node804:@gotham.local:7782/node804";
-      passwordFile = config.sops.secrets."restic-repository-password".path;
-      
-      # Set HTTP authentication
-      extraOptions = [
-        "--option"
-        "rest.connections=10"
-      ];
+    immich = {
+      user = "restic";
+      package = pkgs.writeShellScriptBin "restic" ''
+        exec /run/wrappers/bin/restic "$@"
+      '';
+
+      initialize = true;
+
+      repositoryFile = config.sops.secrets."backups/immich/repository".path;
+      passwordFile = config.sops.secrets."backups/immich/password".path;
 
       # Environment for HTTP auth
-      environmentFile = pkgs.writeText "restic-env" ''
-        RESTIC_REST_USERNAME=node804
-      '';
+      environmentFile = config.sops.templates."gotham-environment".path;
 
-      # Use a script wrapper to handle HTTP password
-      backupPrepareCommand = ''
-        export RESTIC_REST_PASSWORD="$(cat ${config.sops.secrets."restic-http-auth".path})"
-      '';
-
-      paths = [
-        "/home"
-        "/etc"
-        "/var/lib"
-        "/root"
-      ];
-
-      exclude = [
-        "/home/*/.cache"
-        "/home/*/.local/share/Trash"
-        "/home/*/Downloads"
-        "/var/lib/docker"
-        "/var/lib/containers"
-        "*.tmp"
-        "*.swp"
-        "*~"
+      paths = [ 
+        "/mnt/molasses/private-media/"
       ];
 
       timerConfig = {
         OnCalendar = "daily";
         Persistent = true;
-        RandomizedDelaySec = "1h";
+        RandomizedDelaySec = "4h";
       };
 
       pruneOpts = [
         "--keep-daily 7"
         "--keep-weekly 4"
-        "--keep-monthly 3"
-        "--keep-yearly 1"
+        "--keep-monthly 6"
+        "--keep-yearly 2"
       ];
 
       checkOpts = [
-        "--read-data-subset=5%"
-      ];
-
-      # Run initialization and prune after backup
-      initialize = true;
-      
-      # Additional backup options
-      extraBackupArgs = [
-        "--compression=auto"
-        "--exclude-caches"
-        "--one-file-system"
+        "--read-data-subset=10%"
+        "--check-unused"
       ];
     };
   };
 
-  # Enable systemd timer for the backup
-  systemd.timers.restic-backups-daily = {
-    wantedBy = [ "timers.target" ];
+  users.users.restic = {
+    isNormalUser = true;
   };
 
-  # Optional: Add a backup health check script
-  systemd.services.restic-backup-check = {
-    description = "Check restic backup health";
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      ExecStart = pkgs.writeShellScript "restic-check" ''
-        set -eu
-        export RESTIC_REPOSITORY="rest:http://node804:@gotham.local:7782/node804"
-        export RESTIC_PASSWORD_FILE="${config.sops.secrets."restic-repository-password".path}"
-        export RESTIC_REST_USERNAME="node804"
-        export RESTIC_REST_PASSWORD="$(cat ${config.sops.secrets."restic-http-auth".path})"
-        
-        ${pkgs.restic}/bin/restic check --read-data-subset=1%
-      '';
-    };
+  security.wrappers.restic = {
+    source = "${pkgs.restic.out}/bin/restic";
+    owner = "restic";
+    group = "users";
+    permissions = "u=rwx,g=,o=";
+    capabilities = "cap_dac_read_search=+ep";
   };
-
-  systemd.timers.restic-backup-check = {
-    description = "Run restic backup health check weekly";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "weekly";
-      Persistent = true;
-    };
-  };
-
-  # Install restic package
-  environment.systemPackages = with pkgs; [
-    restic
-  ];
 }

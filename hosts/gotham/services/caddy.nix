@@ -31,7 +31,7 @@
 
     virtualHosts = {
       # HTTPS with Cloudflare DNS challenge
-      "resticstash.checks.top" = {
+      "restic.gotham.checks.top" = {
         listenAddresses = [ "0.0.0.0" ];
         extraConfig = ''
           tls {

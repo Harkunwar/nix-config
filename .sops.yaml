@@ -44,3 +44,8 @@ creation_rules:
       - *admin_age
       - *racknerd_age
       - *gotham_age
+  - path_regex: secrets/node804/restic.yaml$
+    key_groups:
+    - age:
+      - *admin_age
+      - *node804_age
