@@ -2,6 +2,14 @@
 {
   sops = {
     secrets = {
+      "repository/gotham/user" = {
+        sopsFile = ../../../secrets/node804/restic.yaml;
+        mode = "0444";
+        owner = "restic";
+        group = "users";
+      };
+
+
       "repository/gotham/password" = {
         sopsFile = ../../../secrets/node804/restic.yaml;
         mode = "0444";
@@ -27,8 +35,8 @@
     templates = {
       "gotham-environment" = {
         content = ''
-          RESTIC_PASSWORD_FIlE="${config.sops.secrets."repository/gotham/password".path}"
-          RESTIC_REST_USERNAME=node804
+          RESTIC_REST_USERNAME="${config.sops.placeholder."repository/gotham/user"}"
+          RESTIC_REST_PASSWORD="${config.sops.placeholder."repository/gotham/password"}"
         '';
         owner = "restic";
         group = "users";
@@ -46,7 +54,7 @@
 
       initialize = true;
 
-      repository = "rest:https://node804:@restic.gotham.checks.top/immich";
+      repository = "rest:https://restic.gotham.checks.top/immich";
       # repositoryFile = config.sops.secrets."backups/immich/repository".path;
       passwordFile = config.sops.secrets."backups/immich/password".path;
 
