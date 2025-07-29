@@ -5,6 +5,7 @@ keys:
     - &racknerd_age age1zwlgtev8hw9dtjkx2sqttvzd0nsl9x68y6sq6q5f3nzvc0smlejs8n5jmn
     - &node804_age age1ld6r9rupl9yp8jcctrcxkqha2m7emframy5jxf2z7yd83eklje2qen5acq
     - &gotham_age age1qh29caglx3wmlhzhtv5eaa6x0vjcaxlth560p43nr9faxq35eupq7fmu3v
+    - &nucboxg3_age age1kdftwaxpssh4emcc3ywllpaqldg4nmw6etxqy9mpxe3xeepu03rs07hl98
 
 creation_rules:
   - path_regex: secrets/wireguard.yaml$

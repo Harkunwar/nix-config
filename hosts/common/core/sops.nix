@@ -7,5 +7,4 @@
         generateKey = true;
     };
   };
-
 }

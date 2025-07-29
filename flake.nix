@@ -33,6 +33,12 @@
         inherit inputs nixpkgs nixpkgs-unstable home-manager;
       };
 
+      # This is the NixOS configuration for the GMKTeck NucBox G3 Plus server
+      # It imports the configuration from the hosts/nucboxg3 directory
+      nucboxg3 = import ./hosts/nucboxg3 {
+        inherit inputs nixpkgs nixpkgs-unstable disko;
+      };
+
       # This is the NixOS configuration for the Racknerd server
       # It imports the configuration from the hosts/racknerd directory
       racknerd = import ./hosts/racknerd {
