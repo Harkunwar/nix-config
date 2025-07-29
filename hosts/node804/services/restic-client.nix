@@ -80,7 +80,11 @@
 
       checkOpts = [
         "--read-data-subset=10%"
-        "--check-unused"
+      ];
+
+      extraOptions = [
+        "--verbose=2"
+        "--progress"
       ];
     };
   };
