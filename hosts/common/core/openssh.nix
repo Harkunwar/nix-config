@@ -3,7 +3,6 @@
   services.openssh = {
     enable = true;
     openFirewall = true;
-    ports = [ 649 ];
     settings = {
       PermitRootLogin = "no";
       PubkeyAuthentication = true;

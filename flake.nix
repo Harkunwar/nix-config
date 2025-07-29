@@ -40,8 +40,8 @@
       };
 
       # This is the NixOS configuration for the DediRock Krypton Tank
-      # It imports the configuration from the hosts/dedirock-krypton-tank directory
-      dedirock-krypton-tank = import ./hosts/dedirock-krypton-tank {
+      # It imports the configuration from the hosts/gotham directory
+      gotham = import ./hosts/gotham {
         inherit inputs nixpkgs nixpkgs-unstable disko;
       };
     };

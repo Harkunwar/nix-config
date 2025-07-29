@@ -13,7 +13,7 @@
     efiInstallAsRemovable = true;
   };
 
-  networking.hostName = "dedirock-krypton-tank";
+  networking.hostName = "gotham";
 
   system.stateVersion = "25.05";
 }

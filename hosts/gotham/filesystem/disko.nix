@@ -46,11 +46,22 @@
         type = "lvm_vg";
         lvs = {
           root = {
+            size = "32G";
+            content = {
+              type = "filesystem";
+              format = "xfs";
+              mountpoint = "/";
+              mountOptions = [
+                "defaults"
+              ];
+            };
+          };
+          backup = {
             size = "100%FREE";
             content = {
               type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
+              format = "xfs";
+              mountpoint = "/mnt/backup";
               mountOptions = [
                 "defaults"
               ];

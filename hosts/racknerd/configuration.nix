@@ -11,9 +11,6 @@
       ./hardware-configuration.nix
     ];
 
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
@@ -35,7 +32,7 @@
   environment.systemPackages = with pkgs; [ git vim ];
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "America/Seattle";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
