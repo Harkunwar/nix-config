@@ -51,3 +51,8 @@ creation_rules:
     - age:
       - *admin_age
       - *node804_age
+  - path_regex: secrets/homeassistant.yaml$
+    key_groups:
+    - age:
+      - *admin_age
+      - *nucboxg3_age

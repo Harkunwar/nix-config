@@ -16,6 +16,7 @@ nixpkgs.lib.nixosSystem rec {
     ./services/zigbee2mqtt.nix
     ./services/mosquitto.nix
     ./services/matter.nix
+    ./services/govee2mqtt.nix
     ./configuration.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
     ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
