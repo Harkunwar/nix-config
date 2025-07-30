@@ -27,6 +27,7 @@ creation_rules:
       - *node804_age
       - *racknerd_age
       - *gotham_age
+      - *nucboxg3_age
   - path_regex: secrets/pocketid.yaml$
     key_groups:
     - age:

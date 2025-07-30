@@ -42,6 +42,11 @@
     };
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  }; 
+
 
   boot = {
     kernelParams = [

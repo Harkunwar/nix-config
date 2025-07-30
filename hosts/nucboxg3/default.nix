@@ -11,7 +11,11 @@ nixpkgs.lib.nixosSystem rec {
     ../common/core/openssh.nix
     ../common/core/flakes.nix
     ../../users/harkunwar.nix
-    ./home-assistant
+    ./services/caddy.nix
+    ./services/home-assistant.nix
+    ./services/zigbee2mqtt.nix
+    ./services/mosquitto.nix
+    ./services/matter.nix
     ./configuration.nix
     # This fixes nixpkgs (for e.g. "nix shell") to match the system nixpkgs
     ({ config, pkgs, options, ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
